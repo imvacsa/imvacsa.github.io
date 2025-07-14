@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>손난로 - 내 손안의 난소암 관리 로드맵</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        /* 스크롤바 숨기기 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #d946ef);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn-primary:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+        /* 토스트 알림 스타일 */
+        #toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 9999px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: bottom 0.5s ease-in-out;
+            z-index: 50;
+        }
+        #toast.show {
+            bottom: 30px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- 메인 컨테이너 -->
+    <div id="app-container" class="max-w-4xl mx-auto">
+
+        <!-- 로딩 화면 (초기 로드 시 잠깐 표시) -->
+        <div id="loading-screen" class="hidden items-center justify-center h-screen">
+            <div class="text-center">
+                <i class="fas fa-spinner fa-spin text-4xl text-purple-500"></i>
+            </div>
+        </div>
+
+        <!-- 로그인 화면 -->
+        <div id="login-screen" class="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-100">
+            <div class="w-full max-w-sm text-center">
+                <div class="mb-8">
+                    <div class="w-24 h-24 brand-gradient rounded-full mx-auto flex items-center justify-center shadow-lg">
+                        <i class="far fa-hand-heart text-5xl text-white"></i>
+                    </div>
+                    <h1 class="text-4xl font-bold text-gray-800 mt-4">손난로</h1>
+                    <p class="text-gray-500 mt-1">내 손안의 난소암 관리 로드맵</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-6">시작하기</h2>
+                    <div class="space-y-4">
+                        <button data-role="patient" class="login-btn w-full btn-primary font-bold py-3 px-4 rounded-lg shadow-md flex items-center justify-center space-x-2">
+                            <i class="fas fa-user-injured"></i>
+                            <span>환자로 시작하기</span>
+                        </button>
+                        <button data-role="doctor" class="login-btn w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded-lg shadow-md flex items-center justify-center space-x-2 transition">
+                             <i class="fas fa-user-md"></i>
+                            <span>의료진으로 시작하기</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 환자용 앱 화면 -->
+        <div id="patient-view" class="hidden">
+            <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl shadow-purple-100">
+                <!-- 헤더 -->
+                <header class="brand-gradient text-white p-4 flex justify-between items-center sticky top-0 z-10 shadow-lg">
+                    <h1 class="text-xl font-bold">손난로</h1>
+                    <div>
+                        <button id="patient-logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt text-xl"></i></button>
+                    </div>
+                </header>
+
+                <!-- 메인 컨텐츠 -->
+                <main id="patient-main-content" class="p-4 pb-20">
+                    <!-- 대시보드 (기본 화면) -->
+                    <div id="patient-dashboard" class="fade-in">
+                        <div class="bg-purple-50 p-4 rounded-xl mb-4">
+                            <p class="font-bold text-purple-800">안녕하세요, <span class="user-name"></span>님!</p>
+                            <p class="text-sm text-purple-600">오늘의 건강 상태를 기록하며 건강한 하루를 만들어가요.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <button data-target="symptom-entry" class="nav-btn bg-pink-100 text-pink-800 p-4 rounded-xl text-center shadow-sm hover:bg-pink-200 transition">
+                                <i class="fas fa-notes-medical text-3xl mb-2"></i>
+                                <span class="font-semibold">증상 기록</span>
+                            </button>
+                            <button data-target="history" class="nav-btn bg-indigo-100 text-indigo-800 p-4 rounded-xl text-center shadow-sm hover:bg-indigo-200 transition">
+                                <i class="fas fa-chart-line text-3xl mb-2"></i>
+                                <span class="font-semibold">기록 보기</span>
+                            </button>
+                            <button data-target="medication" class="nav-btn bg-teal-100 text-teal-800 p-4 rounded-xl text-center shadow-sm hover:bg-teal-200 transition">
+                                <i class="fas fa-pills text-3xl mb-2"></i>
+                                <span class="font-semibold">복약 기록</span>
+                            </button>
+                             <button data-target="education" class="nav-btn bg-amber-100 text-amber-800 p-4 rounded-xl text-center shadow-sm hover:bg-amber-200 transition">
+                                <i class="fas fa-book-open text-3xl mb-2"></i>
+                                <span class="font-semibold">교육 자료</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 증상 기록 페이지 -->
+                    <div id="symptom-entry" class="hidden fade-in">
+                        <h2 class="text-2xl font-bold mb-4">오늘의 증상 기록</h2>
+                        <div class="space-y-4">
+                            <!-- 피로 -->
+                            <div>
+                                <label class="font-semibold">피로, 피곤함, 또는 기운 없음</label>
+                                <div class="flex justify-between mt-2">
+                                    <button data-symptom="fatigue" data-value="0" class="symptom-btn p-2 w-1/5 rounded-lg border">없음</button>
+                                    <button data-symptom="fatigue" data-value="1" class="symptom-btn p-2 w-1/5 rounded-lg border">조금</button>
+                                    <button data-symptom="fatigue" data-value="2" class="symptom-btn p-2 w-1/5 rounded-lg border">보통</button>
+                                    <button data-symptom="fatigue" data-value="3" class="symptom-btn p-2 w-1/5 rounded-lg border">심함</button>
+                                    <button data-symptom="fatigue" data-value="4" class="symptom-btn p-2 w-1/5 rounded-lg border">매우 심함</button>
+                                </div>
+                            </div>
+                            <!-- 메스꺼움 -->
+                             <div>
+                                <label class="font-semibold">메스꺼움</label>
+                                <div class="flex justify-between mt-2">
+                                    <button data-symptom="nausea" data-value="0" class="symptom-btn p-2 w-1/5 rounded-lg border">없음</button>
+                                    <button data-symptom="nausea" data-value="1" class="symptom-btn p-2 w-1/5 rounded-lg border">조금</button>
+                                    <button data-symptom="nausea" data-value="2" class="symptom-btn p-2 w-1/5 rounded-lg border">보통</button>
+                                    <button data-symptom="nausea" data-value="3" class="symptom-btn p-2 w-1/5 rounded-lg border">심함</button>
+                                    <button data-symptom="nausea" data-value="4" class="symptom-btn p-2 w-1/5 rounded-lg border">매우 심함</button>
+                                </div>
+                            </div>
+                            <!-- 손발 저림 -->
+                             <div>
+                                <label class="font-semibold">손발 저림 (말초신경병증)</label>
+                                <div class="flex justify-between mt-2">
+                                    <button data-symptom="neuropathy" data-value="0" class="symptom-btn p-2 w-1/5 rounded-lg border">없음</button>
+                                    <button data-symptom="neuropathy" data-value="1" class="symptom-btn p-2 w-1/5 rounded-lg border">조금</button>
+                                    <button data-symptom="neuropathy" data-value="2" class="symptom-btn p-2 w-1/5 rounded-lg border">보통</button>
+                                    <button data-symptom="neuropathy" data-value="3" class="symptom-btn p-2 w-1/5 rounded-lg border">심함</button>
+                                    <button data-symptom="neuropathy" data-value="4" class="symptom-btn p-2 w-1/5 rounded-lg border">매우 심함</button>
+                                </div>
+                            </div>
+                            <button id="save-symptoms-btn" class="w-full btn-primary font-bold py-3 mt-6 rounded-lg flex items-center justify-center">
+                                <span class="btn-text">저장하기</span>
+                                <i class="fas fa-spinner fa-spin ml-2 hidden btn-loader"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 기록 보기 페이지 -->
+                    <div id="history" class="hidden fade-in">
+                        <h2 class="text-2xl font-bold mb-4">나의 기록</h2>
+                        <div>
+                            <canvas id="symptomChart"></canvas>
+                        </div>
+                        <div id="history-log" class="mt-4 space-y-2"></div>
+                    </div>
+
+                    <!-- 복약 기록 페이지 -->
+                    <div id="medication" class="hidden fade-in">
+                        <h2 class="text-2xl font-bold mb-4">복약 기록</h2>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <input id="med-name" type="text" placeholder="약 이름 (예: PARP 억제제)" class="w-full p-2 border rounded mb-2">
+                            <button id="add-med-btn" class="w-full btn-primary font-bold py-2 rounded-lg flex items-center justify-center">
+                                <span class="btn-text">오늘 복용 기록 추가</span>
+                                <i class="fas fa-spinner fa-spin ml-2 hidden btn-loader"></i>
+                            </button>
+                        </div>
+                        <div id="med-log" class="mt-4 space-y-2"></div>
+                    </div>
+
+                    <!-- 교육 자료 페이지 -->
+                    <div id="education" class="hidden fade-in">
+                        <h2 class="text-2xl font-bold mb-4">건강 정보</h2>
+                        <div class="space-y-3">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                                <h3 class="font-semibold text-purple-700">림프부종 관리하기</h3>
+                                <p class="text-sm text-gray-600 mt-1">적절한 운동과 압박 스타킹 착용이 도움이 될 수 있습니다. 다리를 심장보다 높게 올리는 자세를 자주 취해주세요.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                                <h3 class="font-semibold text-purple-700">항암치료 중 식단 관리</h3>
+                                <p class="text-sm text-gray-600 mt-1">소화가 잘되는 부드러운 음식 위주로 섭취하고, 조금씩 자주 드시는 것이 좋습니다. 단백질 섭취도 중요합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- 하단 네비게이션 -->
+                <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 flex justify-around p-2 shadow-top">
+                    <button data-target="patient-dashboard" class="nav-btn flex-1 text-center text-gray-500 hover:text-purple-600">
+                        <i class="fas fa-home text-xl"></i><span class="text-xs block">홈</span>
+                    </button>
+                    <button data-target="symptom-entry" class="nav-btn flex-1 text-center text-gray-500 hover:text-purple-600">
+                        <i class="fas fa-pen-to-square text-xl"></i><span class="text-xs block">기록</span>
+                    </button>
+                    <button data-target="history" class="nav-btn flex-1 text-center text-gray-500 hover:text-purple-600">
+                        <i class="fas fa-history text-xl"></i><span class="text-xs block">통계</span>
+                    </button>
+                    <button data-target="education" class="nav-btn flex-1 text-center text-gray-500 hover:text-purple-600">
+                        <i class="fas fa-info-circle text-xl"></i><span class="text-xs block">정보</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- 의료진용 웹 화면 -->
+        <div id="doctor-view" class="hidden p-4 md:p-8">
+            <header class="flex justify-between items-center mb-8 pb-4 border-b">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 brand-gradient rounded-full flex items-center justify-center">
+                        <i class="far fa-hand-heart text-2xl text-white"></i>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800">손난로 <span class="text-xl font-normal text-gray-500">의료진 대시보드</span></h1>
+                </div>
+                <button id="doctor-logout-btn" class="logout-btn bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition">로그아웃</button>
+            </header>
+
+            <main id="doctor-main-content" class="text-center">
+                 <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg" role="alert">
+                    <p class="font-bold">안내</p>
+                    <p>이 버전은 로컬 저장소(Local Storage)를 사용하므로, 다른 환자의 데이터를 조회할 수 없습니다.</p>
+                    <p class="mt-2 text-sm">환자와 데이터를 공유하려면 백엔드 서버가 필요합니다.</p>
+                </div>
+            </main>
+        </div>
+
+    </div>
+
+    <!-- 토스트 알림 컨테이너 -->
+    <div id="toast" class=""></div>
+
+    <script>
+        // Use a self-executing function to keep the global scope clean
+        (() => {
+            // --- Global State ---
+            let currentUser = null;
+            let symptomChartInstance = null;
+
+            // --- UI Elements ---
+            const loadingScreen = document.getElementById('loading-screen');
+            const loginScreen = document.getElementById('login-screen');
+            const patientView = document.getElementById('patient-view');
+            const doctorView = document.getElementById('doctor-view');
+            const toastEl = document.getElementById('toast');
+
+            // --- Local Storage Service ---
+            const storage = {
+                // Helper to get all data from localStorage
+                _getData: () => {
+                    return JSON.parse(localStorage.getItem('sonnanroData') || '{}');
+                },
+                // Helper to save all data to localStorage
+                _saveData: (data) => {
+                    localStorage.setItem('sonnanroData', JSON.stringify(data));
+                },
+                
+                // Get logs for a specific user and type ('symptomLogs' or 'medLogs')
+                getLogs: (userId, logType) => {
+                    const data = storage._getData();
+                    if (!data[userId] || !data[userId][logType]) {
+                        return [];
+                    }
+                    // Return sorted by date, newest first
+                    return data[userId][logType].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                },
+
+                // Add a log for a specific user and type
+                addLog: (userId, logType, logData) => {
+                    const data = storage._getData();
+                    if (!data[userId]) {
+                        data[userId] = { symptomLogs: [], medLogs: [] };
+                    }
+                    if (!data[userId][logType]) {
+                        data[userId][logType] = [];
+                    }
+                    data[userId][logType].push({
+                        ...logData,
+                        id: `log-${Math.random().toString(36).substr(2, 9)}`,
+                        createdAt: new Date().toISOString()
+                    });
+                    storage._saveData(data);
+                }
+            };
+
+            // --- Utility Functions ---
+            const showToast = (message, isSuccess = true) => {
+                toastEl.textContent = message;
+                toastEl.className = isSuccess ? 'bg-green-500' : 'bg-red-500';
+                toastEl.classList.add('show');
+                setTimeout(() => {
+                    toastEl.classList.remove('show');
+                }, 3000);
+            };
+
+            const toggleButtonLoading = (button, isLoading) => {
+                const textEl = button.querySelector('.btn-text');
+                const loaderEl = button.querySelector('.btn-loader');
+                if (isLoading) {
+                    button.disabled = true;
+                    if(textEl) textEl.classList.add('hidden');
+                    if(loaderEl) loaderEl.classList.remove('hidden');
+                } else {
+                    button.disabled = false;
+                    if(textEl) textEl.classList.remove('hidden');
+                    if(loaderEl) loaderEl.classList.add('hidden');
+                }
+            };
+
+            // --- Screen Logic ---
+            const showScreen = (screenId) => {
+                ['loading-screen', 'login-screen', 'patient-view', 'doctor-view'].forEach(id => {
+                    document.getElementById(id).classList.add('hidden');
+                });
+                document.getElementById(screenId).classList.remove('hidden');
+            };
+
+            const showPatientPage = (pageId) => {
+                ['patient-dashboard', 'symptom-entry', 'history', 'medication', 'education'].forEach(id => {
+                    document.getElementById(id).classList.add('hidden');
+                });
+                document.getElementById(pageId).classList.remove('hidden');
+                if (pageId === 'history') loadSymptomHistory();
+                if (pageId === 'medication') loadMedicationHistory();
+            };
+
+            // --- Authentication ---
+            const checkLoginState = () => {
+                const user = sessionStorage.getItem('sonnanroUser');
+                if (user) {
+                    currentUser = JSON.parse(user);
+                    if (currentUser.role === 'doctor') {
+                        initializeDoctorView();
+                    } else {
+                        initializePatientView();
+                    }
+                } else {
+                    showScreen('login-screen');
+                }
+            };
+
+            const handleLogin = (role) => {
+                const userId = `user-${role}`; // For demo, use a fixed ID per role
+                const name = role === 'patient' ? `환자 님` : `의료진 님`;
+                const user = { id: userId, name, role };
+                
+                sessionStorage.setItem('sonnanroUser', JSON.stringify(user));
+                currentUser = user;
+                checkLoginState();
+            };
+
+            const logout = () => {
+                sessionStorage.removeItem('sonnanroUser');
+                currentUser = null;
+                showScreen('login-screen');
+            };
+
+            document.querySelectorAll('.login-btn').forEach(btn => {
+                btn.addEventListener('click', () => handleLogin(btn.dataset.role));
+            });
+            document.querySelectorAll('.logout-btn').forEach(btn => {
+                btn.addEventListener('click', logout);
+            });
+
+
+            // --- Patient View Logic ---
+            function initializePatientView() {
+                showScreen('patient-view');
+                document.querySelector('#patient-view .user-name').textContent = currentUser.name;
+                showPatientPage('patient-dashboard');
+                setupPatientNav();
+                setupSymptomEntry();
+            }
+
+            function setupPatientNav() {
+                document.querySelectorAll('#patient-view .nav-btn').forEach(btn => {
+                    btn.addEventListener('click', () => showPatientPage(btn.dataset.target));
+                });
+            }
+
+            function resetSymptomSelection() {
+                document.querySelectorAll('.symptom-btn').forEach(b => {
+                    b.classList.remove('bg-purple-500', 'text-white');
+                    b.classList.add('border');
+                });
+            }
+
+            function setupSymptomEntry() {
+                const symptomButtons = document.querySelectorAll('.symptom-btn');
+                symptomButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const symptom = btn.dataset.symptom;
+                        document.querySelectorAll(`.symptom-btn[data-symptom="${symptom}"]`).forEach(b => {
+                            b.classList.remove('bg-purple-500', 'text-white');
+                        });
+                        btn.classList.add('bg-purple-500', 'text-white');
+                    });
+                });
+
+                const saveBtn = document.getElementById('save-symptoms-btn');
+                saveBtn.addEventListener('click', () => {
+                    toggleButtonLoading(saveBtn, true);
+                    const symptomData = { fatigue: 0, nausea: 0, neuropathy: 0 };
+                    let isComplete = true;
+
+                    for (const key in symptomData) {
+                        const selectedBtn = document.querySelector(`.symptom-btn[data-symptom="${key}"].bg-purple-500`);
+                        if (selectedBtn) {
+                            symptomData[key] = parseInt(selectedBtn.dataset.value, 10);
+                        } else {
+                            isComplete = false;
+                            break;
+                        }
+                    }
+
+                    if (!isComplete) {
+                        showToast('모든 증상을 선택해주세요.', false);
+                        toggleButtonLoading(saveBtn, false);
+                        return;
+                    }
+
+                    storage.addLog(currentUser.id, 'symptomLogs', symptomData);
+                    showToast('증상이 성공적으로 기록되었습니다.');
+                    resetSymptomSelection();
+                    showPatientPage('patient-dashboard');
+                    toggleButtonLoading(saveBtn, false);
+                });
+            }
+
+            function loadSymptomHistory() {
+                const logs = storage.getLogs(currentUser.id, 'symptomLogs');
+                const recentLogs = logs.slice(0, 7);
+                const reversedLogs = [...recentLogs].reverse();
+
+                const labels = reversedLogs.map(log => new Date(log.createdAt).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' }));
+                const fatigueData = reversedLogs.map(log => log.fatigue);
+                const nauseaData = reversedLogs.map(log => log.nausea);
+                const neuropathyData = reversedLogs.map(log => log.neuropathy);
+
+                const ctx = document.getElementById('symptomChart').getContext('2d');
+                if (symptomChartInstance) symptomChartInstance.destroy();
+                symptomChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            { label: '피로', data: fatigueData, borderColor: 'rgb(236, 72, 153)', tension: 0.1 },
+                            { label: '메스꺼움', data: nauseaData, borderColor: 'rgb(168, 85, 247)', tension: 0.1 },
+                            { label: '손발저림', data: neuropathyData, borderColor: 'rgb(20, 184, 166)', tension: 0.1 }
+                        ]
+                    },
+                    options: { scales: { y: { beginAtZero: true, max: 5 } } }
+                });
+
+                document.getElementById('history-log').innerHTML = logs.map(log => `
+                    <div class="bg-gray-100 p-3 rounded-lg">
+                        <p class="font-semibold">${new Date(log.createdAt).toLocaleString('ko-KR')}</p>
+                        <p class="text-sm">피로: ${log.fatigue}, 메스꺼움: ${log.nausea}, 손발저림: ${log.neuropathy}</p>
+                    </div>
+                `).join('') || '<p class="text-gray-500">기록이 없습니다.</p>';
+            }
+
+            const addMedBtn = document.getElementById('add-med-btn');
+            addMedBtn.addEventListener('click', () => {
+                const medNameInput = document.getElementById('med-name');
+                if (!medNameInput.value) {
+                    showToast('약 이름을 입력해주세요.', false);
+                    return;
+                }
+                toggleButtonLoading(addMedBtn, true);
+                storage.addLog(currentUser.id, 'medLogs', { name: medNameInput.value });
+                medNameInput.value = '';
+                showToast('복약 기록이 추가되었습니다.');
+                loadMedicationHistory();
+                toggleButtonLoading(addMedBtn, false);
+            });
+
+            function loadMedicationHistory() {
+                const logs = storage.getLogs(currentUser.id, 'medLogs');
+                const medLogEl = document.getElementById('med-log');
+                if (logs.length === 0) {
+                    medLogEl.innerHTML = '<p class="text-gray-500">복약 기록이 없습니다.</p>';
+                    return;
+                }
+                medLogEl.innerHTML = logs.map(log => `
+                    <div class="bg-gray-100 p-3 rounded-lg flex justify-between items-center">
+                        <span>${log.name}</span>
+                        <span class="text-sm text-gray-500">${new Date(log.createdAt).toLocaleDateString('ko-KR')}</span>
+                    </div>
+                `).join('');
+            }
+
+            // --- Doctor View Logic ---
+            function initializeDoctorView() {
+                showScreen('doctor-view');
+                // No data to load, just show the info message.
+            }
+
+            // --- Initial Load ---
+            checkLoginState();
+        })();
+    </script>
+</body>
+</html>
