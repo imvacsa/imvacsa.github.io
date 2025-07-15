@@ -60,55 +60,21 @@
         #toast.show {
             bottom: 30px;
         }
-
-        /* Click Game Specific Styles */
-        .click-game-button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 20px 40px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 24px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .click-game-button:active {
-            transform: translateY(2px);
-        }
-        .click-game-button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        .click-game-timer {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #4f46e5;
-        }
-        .click-game-count {
-            font-size: 4rem;
-            font-weight: bolder;
-            color: #10b981;
-        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Main Container -->
+    <!-- 메인 컨테이너 -->
     <div id="app-container" class="max-w-4xl mx-auto">
 
-        <!-- Loading Screen (briefly displayed on initial load) -->
+        <!-- 로딩 화면 (초기 로드 시 잠깐 표시) -->
         <div id="loading-screen" class="hidden items-center justify-center h-screen">
             <div class="text-center">
                 <i class="fas fa-spinner fa-spin text-4xl text-purple-500"></i>
             </div>
         </div>
 
-        <!-- Login Screen -->
+        <!-- 로그인 화면 -->
         <div id="login-screen" class="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-100">
             <div class="w-full max-w-sm text-center">
                 <div class="mb-8">
@@ -134,10 +100,10 @@
             </div>
         </div>
 
-        <!-- Patient App Screen -->
+        <!-- 환자용 앱 화면 -->
         <div id="patient-view" class="hidden">
             <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl shadow-purple-100">
-                <!-- Header -->
+                <!-- 헤더 -->
                 <header class="brand-gradient text-white p-4 flex justify-between items-center sticky top-0 z-10 shadow-lg">
                     <h1 class="text-xl font-bold">손난로</h1>
                     <div>
@@ -145,9 +111,9 @@
                     </div>
                 </header>
 
-                <!-- Main Content -->
+                <!-- 메인 컨텐츠 -->
                 <main id="patient-main-content" class="p-4 pb-20">
-                    <!-- Dashboard (Default Screen) -->
+                    <!-- 대시보드 (기본 화면) -->
                     <div id="patient-dashboard" class="fade-in">
                         <div class="bg-purple-50 p-4 rounded-xl mb-4">
                             <p class="font-bold text-purple-800">안녕하세요, <span class="user-name"></span>님!</p>
@@ -170,19 +136,14 @@
                                 <i class="fas fa-book-open text-3xl mb-2"></i>
                                 <span class="font-semibold">교육 자료</span>
                             </button>
-                            <!-- New button for Click Speed Challenge -->
-                            <button data-target="click-game" class="nav-btn bg-blue-100 text-blue-800 p-4 rounded-xl text-center shadow-sm hover:bg-blue-200 transition">
-                                <i class="fas fa-hand-pointer text-3xl mb-2"></i>
-                                <span class="font-semibold">클릭 게임</span>
-                            </button>
                         </div>
                     </div>
 
-                    <!-- Symptom Entry Page -->
+                    <!-- 증상 기록 페이지 -->
                     <div id="symptom-entry" class="hidden fade-in">
                         <h2 class="text-2xl font-bold mb-4">오늘의 증상 기록</h2>
                         <div class="space-y-4">
-                            <!-- Fatigue -->
+                            <!-- 피로 -->
                             <div>
                                 <label class="font-semibold">피로, 피곤함, 또는 기운 없음</label>
                                 <div class="flex justify-between mt-2">
@@ -193,7 +154,7 @@
                                     <button data-symptom="fatigue" data-value="4" class="symptom-btn p-2 w-1/5 rounded-lg border">매우 심함</button>
                                 </div>
                             </div>
-                            <!-- Nausea -->
+                            <!-- 메스꺼움 -->
                              <div>
                                 <label class="font-semibold">메스꺼움</label>
                                 <div class="flex justify-between mt-2">
@@ -204,7 +165,7 @@
                                     <button data-symptom="nausea" data-value="4" class="symptom-btn p-2 w-1/5 rounded-lg border">매우 심함</button>
                                 </div>
                             </div>
-                            <!-- Neuropathy -->
+                            <!-- 손발 저림 -->
                              <div>
                                 <label class="font-semibold">손발 저림 (말초신경병증)</label>
                                 <div class="flex justify-between mt-2">
@@ -222,7 +183,7 @@
                         </div>
                     </div>
                     
-                    <!-- History Page -->
+                    <!-- 기록 보기 페이지 -->
                     <div id="history" class="hidden fade-in">
                         <h2 class="text-2xl font-bold mb-4">나의 기록</h2>
                         <div>
@@ -231,7 +192,7 @@
                         <div id="history-log" class="mt-4 space-y-2"></div>
                     </div>
 
-                    <!-- Medication Page -->
+                    <!-- 복약 기록 페이지 -->
                     <div id="medication" class="hidden fade-in">
                         <h2 class="text-2xl font-bold mb-4">복약 기록</h2>
                         <div class="bg-gray-100 p-4 rounded-lg">
@@ -244,7 +205,7 @@
                         <div id="med-log" class="mt-4 space-y-2"></div>
                     </div>
 
-                    <!-- Education Page -->
+                    <!-- 교육 자료 페이지 -->
                     <div id="education" class="hidden fade-in">
                         <h2 class="text-2xl font-bold mb-4">건강 정보</h2>
                         <div class="space-y-3">
@@ -258,83 +219,9 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Click Game Page -->
-                    <div id="click-game" class="hidden fade-in">
-                        <h2 class="text-2xl font-bold mb-4 text-center">클릭 스피드 챌린지</h2>
-                        <div class="bg-gray-100 p-6 rounded-lg shadow-inner flex flex-col items-center justify-center">
-                            <p class="text-lg font-semibold text-gray-700 mb-4">
-                                <label for="game-duration-select" class="block text-gray-700 text-lg font-semibold mb-2">
-                                    게임 시간 설정 (초):
-                                </label>
-                                <select id="game-duration-select" class="block w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                    <option value="3">3 초</option>
-                                    <option value="4">4 초</option>
-                                    <option value="5" selected>5 초</option>
-                                    <option value="6">6 초</option>
-                                    <option value="7">7 초</option>
-                                    <option value="8">8 초</option>
-                                    <option value="9">9 초</option>
-                                    <option value="10">10 초</option>
-                                </select>
-                            </p>
-                            <button id="start-game-btn" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xl rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mb-4">
-                                게임 시작
-                            </button>
-
-                            <div id="game-active-display" class="hidden flex flex-col items-center">
-                                <p class="text-lg font-semibold text-gray-700 mb-2">
-                                    남은 시간: <span id="game-timer" class="click-game-timer">10</span> 초
-                                </p>
-                                <button id="click-button" class="click-game-button">
-                                    클릭!
-                                </button>
-                                <span id="click-count" class="click-game-count">0</span>
-                            </div>
-
-                            <div id="game-results-display" class="hidden text-center">
-                                <p class="text-xl font-bold text-gray-800 mb-2">
-                                    게임 종료!
-                                </p>
-                                <p class="text-2xl font-bold text-green-600">
-                                    이번 라운드 초당 클릭수 (CPS): <span id="current-round-cps">0.00</span>
-                                </p>
-                                <button id="restart-game-btn" class="mt-8 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-                                    다시 시작
-                                </button>
-                            </div>
-                            <p id="game-instructions" class="text-sm text-gray-600 mt-4">
-                                게임 시작 버튼을 눌러 카운트다운을 시작하세요.
-                            </p>
-                        </div>
-
-                        <div class="mt-8 bg-white shadow-lg rounded-lg p-6 flex flex-col items-center justify-center">
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">
-                                누적 기록
-                            </h3>
-                            <div class="text-center mb-4">
-                                <p class="text-xl font-bold text-blue-600">
-                                    최고 CPS: <span id="highest-cps" class="text-3xl">0.00</span>
-                                </p>
-                                <p class="text-xl font-bold text-teal-600">
-                                    평균 CPS: <span id="average-cps" class="text-3xl">0.00</span>
-                                </p>
-                            </div>
-                            <p class="text-lg font-semibold text-gray-700 mb-2">
-                                게임 횟수별 초당 클릭수 (최근 순)
-                            </p>
-                            <ul id="game-history-list" class="list-disc list-inside text-gray-700 mb-4 max-h-48 overflow-y-auto w-full text-center">
-                                <li>아직 기록이 없습니다. 게임을 시작하세요!</li>
-                            </ul>
-                            <button id="reset-all-records-btn" class="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-                                모든 기록 초기화
-                            </button>
-                        </div>
-                    </div>
-
                 </main>
 
-                <!-- Bottom Navigation -->
+                <!-- 하단 네비게이션 -->
                 <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 flex justify-around p-2 shadow-top">
                     <button data-target="patient-dashboard" class="nav-btn flex-1 text-center text-gray-500 hover:text-purple-600">
                         <i class="fas fa-home text-xl"></i><span class="text-xs block">홈</span>
@@ -352,7 +239,7 @@
             </div>
         </div>
 
-        <!-- Doctor View Screen -->
+        <!-- 의료진용 웹 화면 -->
         <div id="doctor-view" class="hidden p-4 md:p-8">
             <header class="flex justify-between items-center mb-8 pb-4 border-b">
                 <div class="flex items-center space-x-3">
@@ -375,7 +262,7 @@
 
     </div>
 
-    <!-- Toast Notification Container -->
+    <!-- 토스트 알림 컨테이너 -->
     <div id="toast" class=""></div>
 
     <script>
@@ -403,7 +290,7 @@
                     localStorage.setItem('sonnanroData', JSON.stringify(data));
                 },
                 
-                // Get logs for a specific user and type ('symptomLogs', 'medLogs', or 'clickGameLogs')
+                // Get logs for a specific user and type ('symptomLogs' or 'medLogs')
                 getLogs: (userId, logType) => {
                     const data = storage._getData();
                     if (!data[userId] || !data[userId][logType]) {
@@ -417,7 +304,7 @@
                 addLog: (userId, logType, logData) => {
                     const data = storage._getData();
                     if (!data[userId]) {
-                        data[userId] = { symptomLogs: [], medLogs: [], clickGameLogs: [] }; // Initialize clickGameLogs
+                        data[userId] = { symptomLogs: [], medLogs: [] };
                     }
                     if (!data[userId][logType]) {
                         data[userId][logType] = [];
@@ -464,13 +351,12 @@
             };
 
             const showPatientPage = (pageId) => {
-                ['patient-dashboard', 'symptom-entry', 'history', 'medication', 'education', 'click-game'].forEach(id => {
+                ['patient-dashboard', 'symptom-entry', 'history', 'medication', 'education'].forEach(id => {
                     document.getElementById(id).classList.add('hidden');
                 });
                 document.getElementById(pageId).classList.remove('hidden');
                 if (pageId === 'history') loadSymptomHistory();
                 if (pageId === 'medication') loadMedicationHistory();
-                if (pageId === 'click-game') initializeClickGame(); // Initialize click game when its page is shown
             };
 
             // --- Authentication ---
@@ -638,131 +524,6 @@
                     </div>
                 `).join('');
             }
-
-            // --- Click Game Logic ---
-            let clickCount = 0;
-            let gameTimer = 0;
-            let gameInterval = null;
-            let initialGameDuration = 0; // To store the selected duration for CPS calculation
-
-            const startGameBtn = document.getElementById('start-game-btn');
-            const restartGameBtn = document.getElementById('restart-game-btn');
-            const clickButton = document.getElementById('click-button');
-            const gameTimerEl = document.getElementById('game-timer');
-            const clickCountEl = document.getElementById('click-count');
-            const currentRoundCPSEl = document.getElementById('current-round-cps');
-            const gameInstructionsEl = document.getElementById('game-instructions');
-            const gameDurationSelect = document.getElementById('game-duration-select');
-            const gameActiveDisplay = document.getElementById('game-active-display');
-            const gameResultsDisplay = document.getElementById('game-results-display');
-            const highestCPSEl = document.getElementById('highest-cps');
-            const averageCPSEl = document.getElementById('average-cps');
-            const gameHistoryListEl = document.getElementById('game-history-list');
-            const resetAllRecordsBtn = document.getElementById('reset-all-records-btn');
-
-            function initializeClickGame() {
-                clickCount = 0;
-                gameTimer = parseInt(gameDurationSelect.value, 10);
-                initialGameDuration = gameTimer; // Set initial duration for CPS calculation
-                gameTimerEl.textContent = gameTimer;
-                clickCountEl.textContent = clickCount;
-                currentRoundCPSEl.textContent = '0.00';
-
-                gameDurationSelect.disabled = false; // Enable duration selection before game starts
-                startGameBtn.classList.remove('hidden');
-                gameActiveDisplay.classList.add('hidden');
-                gameResultsDisplay.classList.add('hidden');
-                gameInstructionsEl.textContent = '게임 시작 버튼을 눌러 카운트다운을 시작하세요.';
-                
-                loadClickGameHistory(); // Load history when game page is initialized
-            }
-
-            function startClickGame() {
-                clickCount = 0;
-                gameTimer = parseInt(gameDurationSelect.value, 10);
-                initialGameDuration = gameTimer; // Set initial duration for CPS calculation
-                gameTimerEl.textContent = gameTimer;
-                clickCountEl.textContent = clickCount;
-                currentRoundCPSEl.textContent = '0.00';
-
-                startGameBtn.classList.add('hidden');
-                gameDurationSelect.disabled = true; // Disable duration selection during game
-                gameActiveDisplay.classList.remove('hidden');
-                gameResultsDisplay.classList.add('hidden');
-                clickButton.disabled = false;
-                gameInstructionsEl.textContent = '시간이 다 될 때까지 최대한 많이 클릭하세요!';
-
-                if (gameInterval) clearInterval(gameInterval);
-
-                gameInterval = setInterval(() => {
-                    gameTimer--;
-                    gameTimerEl.textContent = gameTimer;
-
-                    if (gameTimer <= 0) {
-                        clearInterval(gameInterval);
-                        clickButton.disabled = true;
-                        gameActiveDisplay.classList.add('hidden');
-                        gameResultsDisplay.classList.remove('hidden');
-                        gameInstructionsEl.textContent = '게임 종료!';
-
-                        const finalClicks = clickCount;
-                        const calculatedCPS = initialGameDuration > 0 ? (finalClicks / initialGameDuration).toFixed(2) : 0;
-                        currentRoundCPSEl.textContent = parseFloat(calculatedCPS).toFixed(2);
-
-                        // Save game result
-                        storage.addLog(currentUser.id, 'clickGameLogs', { cps: parseFloat(calculatedCPS) });
-                        loadClickGameHistory(); // Reload history after saving new result
-                    }
-                }, 1000);
-            }
-
-            function handleGameClick() {
-                if (gameTimer > 0) {
-                    clickCount++;
-                    clickCountEl.textContent = clickCount;
-                }
-            }
-
-            function loadClickGameHistory() {
-                const logs = storage.getLogs(currentUser.id, 'clickGameLogs');
-                
-                if (logs.length === 0) {
-                    highestCPSEl.textContent = '0.00';
-                    averageCPSEl.textContent = '0.00';
-                    gameHistoryListEl.innerHTML = '<li>아직 기록이 없습니다. 게임을 시작하세요!</li>';
-                    return;
-                }
-
-                const cpsValues = logs.map(log => log.cps);
-                const highest = Math.max(...cpsValues).toFixed(2);
-                const average = (cpsValues.reduce((sum, val) => sum + val, 0) / cpsValues.length).toFixed(2);
-
-                highestCPSEl.textContent = highest;
-                averageCPSEl.textContent = average;
-
-                gameHistoryListEl.innerHTML = [...logs].reverse().map((log, index) => `
-                    <li class="py-1">
-                        게임 ${logs.length - index} : ${log.cps.toFixed(2)} CPS
-                        <span class="text-sm text-gray-500">(${new Date(log.createdAt).toLocaleDateString('ko-KR')})</span>
-                    </li>
-                `).join('');
-            }
-
-            function resetClickGameRecords() {
-                const data = storage._getData();
-                if (data[currentUser.id]) {
-                    data[currentUser.id].clickGameLogs = [];
-                    storage._saveData(data);
-                }
-                showToast('모든 클릭 게임 기록이 초기화되었습니다.');
-                loadClickGameHistory(); // Reload history after reset
-            }
-
-            startGameBtn.addEventListener('click', startClickGame);
-            restartGameBtn.addEventListener('click', startClickGame);
-            clickButton.addEventListener('click', handleGameClick);
-            resetAllRecordsBtn.addEventListener('click', resetClickGameRecords);
-
 
             // --- Doctor View Logic ---
             function initializeDoctorView() {
