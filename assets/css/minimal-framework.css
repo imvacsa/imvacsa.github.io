@@ -1,0 +1,230 @@
+/* Minimal CSS Framework - Tailwind-like utilities */
+* {
+    box-sizing: border-box;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .container { max-width: 640px; }
+}
+
+@media (min-width: 768px) {
+    .container { max-width: 768px; }
+}
+
+@media (min-width: 1024px) {
+    .container { max-width: 1024px; }
+}
+
+@media (min-width: 1280px) {
+    .container { max-width: 1280px; }
+}
+
+/* Grid */
+.grid {
+    display: grid;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.gap-8 {
+    gap: 2rem;
+}
+
+/* Flexbox */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+@media (min-width: 768px) {
+    .md\:flex-row {
+        flex-direction: row;
+    }
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.space-y-6 > * + * {
+    margin-top: 1.5rem;
+}
+
+.space-x-8 > * + * {
+    margin-left: 2rem;
+}
+
+@media (min-width: 768px) {
+    .md\:space-y-0 > * + * {
+        margin-top: 0;
+    }
+    .md\:space-x-8 > * + * {
+        margin-left: 2rem;
+    }
+}
+
+/* Spacing */
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+
+@media (min-width: 768px) {
+    .md\:p-8 { padding: 2rem; }
+}
+
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+
+@media (min-width: 768px) {
+    .md\:py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+}
+
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mb-2 { margin-top: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.mb-16 { margin-bottom: 4rem; }
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Text */
+.text-center {
+    text-align: center;
+}
+
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-md { font-size: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-5xl { font-size: 3rem; }
+
+@media (min-width: 768px) {
+    .md\:text-xl { font-size: 1.25rem; }
+    .md\:text-6xl { font-size: 3.75rem; }
+}
+
+.font-bold { font-weight: 700; }
+.font-black { font-weight: 900; }
+
+.leading-tight { line-height: 1.25; }
+
+/* Colors */
+.text-white { color: #ffffff; }
+
+/* Width */
+.w-full { width: 100%; }
+.w-16 { width: 4rem; }
+
+@media (min-width: 768px) {
+    .md\:w-auto { width: auto; }
+}
+
+.max-w-3xl { max-width: 48rem; }
+
+/* Height */
+.h-16 { height: 4rem; }
+.h-56 { height: 14rem; }
+.h-64 { height: 16rem; }
+
+.max-h-56 { max-height: 14rem; }
+.max-h-64 { max-height: 16rem; }
+
+/* Background */
+.bg-white { background-color: #ffffff; }
+
+/* Border */
+.rounded-lg { border-radius: 0.5rem; }
+.rounded-full { border-radius: 9999px; }
+
+/* Shadow */
+.shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Display */
+.inline-block { display: inline-block; }
+.hidden { display: none; }
+
+@media (min-width: 768px) {
+    .md\:block { display: block; }
+    .md\:hidden { display: none; }
+}
+
+/* Position */
+.relative { position: relative; }
+
+/* Transform */
+.rotate-90 { transform: rotate(90deg); }
+
+/* Transition */
+.transition {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.duration-300 {
+    transition-duration: 300ms;
+}
+
+.ease-in-out {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover */
+.hover\:bg-\[\.00A4FF\]:hover {
+    background-color: #00A4FF;
+}
+
+/* List */
+.list-disc { list-style-type: disc; }
+.list-inside { list-style-position: inside; }
+
+/* Flex grow */
+.flex-grow { flex-grow: 1; }
+
+/* Margin auto */
+.mt-auto { margin-top: auto; }
