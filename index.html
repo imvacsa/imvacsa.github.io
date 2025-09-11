@@ -4,16 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI in Ovarian Cancer Survivor Healthcare</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta name="description" content="A national R&D project using AI to create human-centered medical environment for ovarian cancer survivors. Led by PI Myung-chul Lim at National Cancer Center.">
+    <meta name="keywords" content="AI, ovarian cancer, survivor healthcare, personalized medicine, Son-Nanro app, medical research">
+    <meta name="author" content="National Cancer Center, Gynecologic Cancer Center">
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="AI in Ovarian Cancer Survivor Healthcare">
+    <meta property="og:description" content="A national R&D project using AI to create human-centered medical environment for ovarian cancer survivors">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imvacsa.github.io/">
+    
+    <!-- Local resources -->
+    <link rel="stylesheet" href="assets/css/minimal-framework.css">
+    <script src="assets/js/simple-chart.js"></script>
+    
+    <!-- Fallback fonts -->
     <style>
+        /* Fallback font system */
         body {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
             background-color: #F5F5F5;
+            color: #2D2D2D;
         }
+        
+        /* Try to load Google Fonts, fallback gracefully */
+        @font-face {
+            font-family: 'Inter-Fallback';
+            src: local('Inter'), local('Segoe UI'), local('system-ui');
+            font-weight: 400;
+        }
+        
+        /* Brand colors */
+        .text-\[\.0047FF\] { color: #0047FF; }
+        .text-\[\.2D2D2D\] { color: #2D2D2D; }
+        .text-\[\.2D2D2D\]\/70 { color: rgba(45, 45, 45, 0.7); }
+        .bg-\[\.0047FF\] { background-color: #0047FF; }
+        .bg-\[\.00A4FF\] { background-color: #00A4FF; }
+        .bg-\[\.FFC700\] { background-color: #FFC700; }
+        .bg-\[\.FF6F00\] { background-color: #FF6F00; }
+        .bg-\[\.2D2D2D\] { background-color: #2D2D2D; }
+        .hover\:bg-\[\.00A4FF\]:hover { background-color: #00A4FF; }
+        
         .chart-container {
             position: relative;
             width: 100%;
@@ -35,48 +66,80 @@
             margin: 0.5rem 0;
             color: #00A4FF;
         }
+        
+        /* Improve chart canvas styling */
+        .chart-container canvas {
+            background-color: transparent;
+            border-radius: 8px;
+        }
+        
+        /* Loading state for charts */
+        .chart-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Accessibility improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
+
 </head>
 <body class="text-[#2D2D2D]">
 
-    <main class="container mx-auto p-4 md:p-8">
+    <main class="container mx-auto p-4 md:p-8" role="main">
 
-        <header class="text-center py-12 md:py-20">
+        <header class="text-center py-12 md:py-20" role="banner">
             <h1 class="text-4xl md:text-6xl font-black text-[#0047FF] leading-tight">AI, Creating a Human-Centered Medical Environment</h1>
             <p class="mt-4 text-lg md:text-xl text-[#2D2D2D]">The Case of Ovarian Cancer Survivors: A National R&D Project</p>
             <p class="mt-6">
-                <a href="handwarmer.html" class="inline-block px-6 py-3 rounded-full bg-[#0047FF] text-white font-bold shadow-lg hover:bg-[#00A4FF] transition duration-300 ease-in-out">
+                <a href="handwarmer.html" class="inline-block px-6 py-3 rounded-full bg-[#0047FF] text-white font-bold shadow-lg hover:bg-[#00A4FF] transition duration-300 ease-in-out" aria-label="Explore the Son-Nanro mobile application">
                     Explore the Son-Nanro App
                 </a>
             </p>
         </header>
 
-        <section id="challenges" class="mb-16">
+        <section id="challenges" class="mb-16" aria-labelledby="challenges-heading">
             <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold">The Silent Struggle After Treatment</h2>
+                <h2 id="challenges-heading" class="text-3xl font-bold">The Silent Struggle After Treatment</h2>
                 <p class="mt-2 text-md max-w-3xl mx-auto">Survival is a victory, but it marks the beginning of a new journey. Ovarian cancer survivors face a complex web of physical and psychological challenges that require continuous, personalized support.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white rounded-lg shadow-md p-6 text-center">
                     <h3 class="text-xl font-bold mb-4">Pervasive Fatigue</h3>
-                    <div class="chart-container h-56 max-h-56">
-                        <canvas id="fatigueChart"></canvas>
+                    <div class="chart-container h-56 max-h-56" role="img" aria-label="Chart showing 85% of survivors experience pervasive fatigue">
+                        <canvas id="fatigueChart" aria-hidden="true"></canvas>
                     </div>
                     <p class="mt-4 text-sm">A significant percentage of survivors report persistent fatigue that impacts their daily lives, making simple tasks feel monumental.</p>
+                    <span class="sr-only">85% of survivors experience pervasive fatigue</span>
                 </div>
                 <div class="bg-white rounded-lg shadow-md p-6 text-center">
                     <h3 class="text-xl font-bold mb-4">Chronic Pain</h3>
-                     <div class="chart-container h-56 max-h-56">
-                        <canvas id="painChart"></canvas>
+                     <div class="chart-container h-56 max-h-56" role="img" aria-label="Chart showing 65% of survivors experience chronic pain">
+                        <canvas id="painChart" aria-hidden="true"></canvas>
                     </div>
                     <p class="mt-4 text-sm">Ongoing pain and discomfort are common, requiring careful management to maintain quality of life.</p>
+                    <span class="sr-only">65% of survivors experience chronic pain</span>
                 </div>
                 <div class="bg-white rounded-lg shadow-md p-6 text-center">
                     <h3 class="text-xl font-bold mb-4">Mental Health</h3>
-                     <div class="chart-container h-56 max-h-56">
-                        <canvas id="anxietyChart"></canvas>
+                     <div class="chart-container h-56 max-h-56" role="img" aria-label="Chart showing 70% of survivors experience mental health challenges">
+                        <canvas id="anxietyChart" aria-hidden="true"></canvas>
                     </div>
                     <p class="mt-4 text-sm">Anxiety about recurrence and the stress of managing health can take a heavy toll on emotional well-being.</p>
+                    <span class="sr-only">70% of survivors experience mental health challenges</span>
                 </div>
             </div>
         </section>
