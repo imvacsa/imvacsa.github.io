@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보건의료 경제성평가 도구 | Health Economic Evaluation Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', 'Noto Sans KR', sans-serif; background: #f8fafc; }
+        .gradient-header { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .input-field {
+            @apply w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition;
+        }
+        .btn-primary {
+            @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-lg transition shadow-md hover:shadow-lg;
+        }
+        .btn-secondary {
+            @apply bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition text-sm;
+        }
+        .result-table {
+            @apply w-full text-sm border-collapse;
+        }
+        .result-table thead th {
+            @apply bg-gray-800 text-white px-4 py-3 text-left font-semibold;
+        }
+        .result-table tbody td {
+            @apply px-4 py-2.5 border-b border-gray-200;
+        }
+        .result-table tbody tr:hover {
+            @apply bg-blue-50;
+        }
+        .pub-table {
+            @apply w-full text-xs border-collapse;
+        }
+        .pub-table thead th {
+            @apply border-t-2 border-b border-black px-3 py-2 text-left font-semibold;
+        }
+        .pub-table tbody td {
+            @apply px-3 py-1.5 border-b border-gray-300;
+        }
+        .pub-table tfoot td {
+            @apply px-3 py-2 border-t-2 border-black text-xs text-gray-600;
+        }
+        .chart-box {
+            @apply bg-white rounded-xl shadow-md p-6;
+        }
+        .tab-btn {
+            @apply px-4 py-2 text-sm font-medium rounded-t-lg transition cursor-pointer;
+        }
+        .tab-btn.active {
+            @apply bg-white text-blue-700 border-t-2 border-x border-blue-600 border-gray-200 -mb-px;
+        }
+        .tab-btn:not(.active) {
+            @apply bg-gray-100 text-gray-600 hover:bg-gray-200;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<!-- Header -->
+<header class="gradient-header text-white no-print">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold">Health Economic Evaluation Tool</h1>
+                <p class="text-blue-200 text-sm mt-1">보건의료 경제성평가 도구 - 논문용 표/그림 생성</p>
+            </div>
+            <a href="index.html" class="text-blue-200 hover:text-white text-sm transition">&larr; 메인 페이지</a>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-8">
+
+    <!-- Input Section -->
+    <section class="no-print mb-8">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">분석 입력값 설정</h2>
+
+            <!-- Basic Parameters -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Intervention -->
+                <div class="bg-blue-50 rounded-lg p-5">
+                    <h3 class="font-bold text-blue-800 mb-4 text-lg">중재군 (Intervention)</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">중재명</label>
+                            <input type="text" id="intv_name" value="신규 치료법" class="input-field">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">총 비용 (원)</label>
+                                <input type="number" id="intv_cost" value="15000000" class="input-field" step="100000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">효과 (QALY)</label>
+                                <input type="number" id="intv_qaly" value="5.2" class="input-field" step="0.01">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">비용 SD</label>
+                                <input type="number" id="intv_cost_sd" value="3000000" class="input-field" step="100000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">효과 SD</label>
+                                <input type="number" id="intv_qaly_sd" value="0.8" class="input-field" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparator -->
+                <div class="bg-gray-50 rounded-lg p-5">
+                    <h3 class="font-bold text-gray-700 mb-4 text-lg">대조군 (Comparator)</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">대조명</label>
+                            <input type="text" id="comp_name" value="기존 치료법" class="input-field">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">총 비용 (원)</label>
+                                <input type="number" id="comp_cost" value="8000000" class="input-field" step="100000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">효과 (QALY)</label>
+                                <input type="number" id="comp_qaly" value="4.0" class="input-field" step="0.01">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">비용 SD</label>
+                                <input type="number" id="comp_cost_sd" value="2000000" class="input-field" step="100000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">효과 SD</label>
+                                <input type="number" id="comp_qaly_sd" value="0.6" class="input-field" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Settings -->
+            <div class="bg-yellow-50 rounded-lg p-5 mb-6">
+                <h3 class="font-bold text-yellow-800 mb-4 text-lg">분석 설정</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">지불의사금액 (WTP, 원/QALY)</label>
+                        <input type="number" id="wtp" value="20000000" class="input-field" step="1000000">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">통화 단위</label>
+                        <select id="currency" class="input-field">
+                            <option value="KRW">KRW (원)</option>
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (&euro;)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">할인율 (%)</label>
+                        <input type="number" id="discount_rate" value="5.0" class="input-field" step="0.5">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">PSA 시뮬레이션 수</label>
+                        <input type="number" id="n_sim" value="1000" class="input-field" min="100" max="10000" step="100">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sensitivity Analysis Parameters -->
+            <div class="bg-green-50 rounded-lg p-5 mb-6">
+                <h3 class="font-bold text-green-800 mb-4 text-lg">민감도 분석 파라미터 (One-way)</h3>
+                <p class="text-xs text-gray-600 mb-3">각 파라미터의 기본값 대비 변동 범위를 설정합니다. (기본값의 &plusmn;%)</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="sa_params">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">중재 비용 변동 (%)</label>
+                        <input type="number" id="sa_intv_cost" value="20" class="input-field" step="5">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">대조 비용 변동 (%)</label>
+                        <input type="number" id="sa_comp_cost" value="20" class="input-field" step="5">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">중재 효과 변동 (%)</label>
+                        <input type="number" id="sa_intv_qaly" value="15" class="input-field" step="5">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">대조 효과 변동 (%)</label>
+                        <input type="number" id="sa_comp_qaly" value="15" class="input-field" step="5">
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="runAnalysis()" class="btn-primary text-lg px-10 py-3">
+                    분석 실행
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="hidden">
+
+        <!-- Tabs -->
+        <div class="flex space-x-1 mb-0 no-print" id="tab-bar">
+            <button class="tab-btn active" onclick="showTab('summary')">요약 결과</button>
+            <button class="tab-btn" onclick="showTab('ceplane')">CE Plane</button>
+            <button class="tab-btn" onclick="showTab('tornado')">토네이도</button>
+            <button class="tab-btn" onclick="showTab('ceac')">CEAC</button>
+            <button class="tab-btn" onclick="showTab('pubtable')">논문용 표</button>
+        </div>
+
+        <!-- Tab: Summary -->
+        <div id="tab-summary" class="tab-content">
+            <div class="chart-box">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">비용-효과 분석 결과 요약</h3>
+                    <button onclick="copyTable('summary-table')" class="btn-secondary no-print">표 복사</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="result-table" id="summary-table">
+                        <thead>
+                            <tr>
+                                <th>항목</th>
+                                <th class="text-right">중재군</th>
+                                <th class="text-right">대조군</th>
+                                <th class="text-right">차이 (Incremental)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="summary-body"></tbody>
+                    </table>
+                </div>
+                <div id="icer-result" class="mt-6 p-4 bg-blue-50 rounded-lg"></div>
+            </div>
+        </div>
+
+        <!-- Tab: CE Plane -->
+        <div id="tab-ceplane" class="tab-content hidden">
+            <div class="chart-box">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">Cost-Effectiveness Plane</h3>
+                    <button onclick="downloadChart('cePlaneChart')" class="btn-secondary no-print">PNG 다운로드</button>
+                </div>
+                <div style="position:relative; height:500px; max-width:700px; margin:0 auto;">
+                    <canvas id="cePlaneChart"></canvas>
+                </div>
+                <p class="text-xs text-gray-500 mt-3 text-center">점선: WTP threshold | 각 점은 PSA 시뮬레이션 결과</p>
+            </div>
+        </div>
+
+        <!-- Tab: Tornado -->
+        <div id="tab-tornado" class="tab-content hidden">
+            <div class="chart-box">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">Tornado Diagram (One-way Sensitivity Analysis)</h3>
+                    <button onclick="downloadChart('tornadoChart')" class="btn-secondary no-print">PNG 다운로드</button>
+                </div>
+                <div style="position:relative; height:400px; max-width:800px; margin:0 auto;">
+                    <canvas id="tornadoChart"></canvas>
+                </div>
+                <p class="text-xs text-gray-500 mt-3 text-center">기준 ICER 대비 각 파라미터 변동 시 ICER 변화 범위</p>
+            </div>
+        </div>
+
+        <!-- Tab: CEAC -->
+        <div id="tab-ceac" class="tab-content hidden">
+            <div class="chart-box">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">Cost-Effectiveness Acceptability Curve (CEAC)</h3>
+                    <button onclick="downloadChart('ceacChart')" class="btn-secondary no-print">PNG 다운로드</button>
+                </div>
+                <div style="position:relative; height:450px; max-width:700px; margin:0 auto;">
+                    <canvas id="ceacChart"></canvas>
+                </div>
+                <p class="text-xs text-gray-500 mt-3 text-center">WTP에 따른 중재군이 비용-효과적일 확률</p>
+            </div>
+        </div>
+
+        <!-- Tab: Publication Table -->
+        <div id="tab-pubtable" class="tab-content hidden">
+            <div class="chart-box">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">논문용 표 (Publication-ready Tables)</h3>
+                    <div class="space-x-2 no-print">
+                        <button onclick="copyTable('pub-table-1')" class="btn-secondary">Table 1 복사</button>
+                        <button onclick="copyTable('pub-table-2')" class="btn-secondary">Table 2 복사</button>
+                        <button onclick="window.print()" class="btn-secondary">인쇄/PDF</button>
+                    </div>
+                </div>
+
+                <!-- Publication Table 1: Base-case results -->
+                <div class="mb-8">
+                    <p class="text-sm font-semibold mb-2">Table 1. Base-case cost-effectiveness analysis results</p>
+                    <div class="overflow-x-auto">
+                        <table class="pub-table" id="pub-table-1">
+                            <thead>
+                                <tr>
+                                    <th>Strategy</th>
+                                    <th class="text-right">Cost</th>
+                                    <th class="text-right">Incremental cost</th>
+                                    <th class="text-right">Effectiveness (QALY)</th>
+                                    <th class="text-right">Incremental effectiveness</th>
+                                    <th class="text-right">ICER (per QALY gained)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pub-table-1-body"></tbody>
+                            <tfoot>
+                                <tr><td colspan="6" id="pub-table-1-footer"></td></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Publication Table 2: Sensitivity Analysis -->
+                <div>
+                    <p class="text-sm font-semibold mb-2">Table 2. One-way sensitivity analysis results</p>
+                    <div class="overflow-x-auto">
+                        <table class="pub-table" id="pub-table-2">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th class="text-right">Base-case value</th>
+                                    <th class="text-right">Low value</th>
+                                    <th class="text-right">High value</th>
+                                    <th class="text-right">ICER (Low)</th>
+                                    <th class="text-right">ICER (High)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pub-table-2-body"></tbody>
+                            <tfoot>
+                                <tr><td colspan="6">ICER, incremental cost-effectiveness ratio; QALY, quality-adjusted life year.</td></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="text-center py-6 text-xs text-gray-400 no-print">
+    <p>Health Economic Evaluation Tool &copy; 2025 JuWon Lim Laboratory, Seoul National University Hospital</p>
+</footer>
+
+<script>
+// ===== Utility Functions =====
+const V = id => document.getElementById(id);
+const N = id => parseFloat(V(id).value);
+
+function fmt(n, decimals = 0) {
+    if (!isFinite(n)) return 'Dominated';
+    return n.toLocaleString('ko-KR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+
+function currencySymbol() {
+    const c = V('currency').value;
+    return c === 'USD' ? '$' : c === 'EUR' ? '\u20AC' : '\u20A9';
+}
+
+function fmtCost(n) {
+    const sym = currencySymbol();
+    return sym + fmt(n);
+}
+
+// Box-Muller transform for normal random
+function randn() {
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+
+// ===== Chart instances =====
+let cePlaneChartInst = null;
+let tornadoChartInst = null;
+let ceacChartInst = null;
+
+// ===== Tab switching =====
+function showTab(name) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    V('tab-' + name).classList.remove('hidden');
+    event.target.classList.add('active');
+}
+
+// ===== Copy table to clipboard =====
+function copyTable(tableId) {
+    const table = V(tableId);
+    const range = document.createRange();
+    range.selectNode(table);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('표가 클립보드에 복사되었습니다. Excel/Word에 붙여넣기 하세요.');
+}
+
+// ===== Download chart as PNG =====
+function downloadChart(canvasId) {
+    const canvas = V(canvasId);
+    const link = document.createElement('a');
+    link.download = canvasId + '.png';
+    link.href = canvas.toDataURL('image/png', 1.0);
+    link.click();
+}
+
+// ===== Calculate ICER =====
+function calcICER(c1, c0, e1, e0) {
+    const de = e1 - e0;
+    const dc = c1 - c0;
+    if (de === 0) return dc <= 0 ? -Infinity : Infinity;
+    return dc / de;
+}
+
+// ===== Main Analysis =====
+function runAnalysis() {
+    const intv_name = V('intv_name').value;
+    const comp_name = V('comp_name').value;
+    const intv_cost = N('intv_cost');
+    const comp_cost = N('comp_cost');
+    const intv_qaly = N('intv_qaly');
+    const comp_qaly = N('comp_qaly');
+    const intv_cost_sd = N('intv_cost_sd');
+    const comp_cost_sd = N('comp_cost_sd');
+    const intv_qaly_sd = N('intv_qaly_sd');
+    const comp_qaly_sd = N('comp_qaly_sd');
+    const wtp = N('wtp');
+    const nSim = N('n_sim');
+
+    const dc = intv_cost - comp_cost;
+    const de = intv_qaly - comp_qaly;
+    const icer = calcICER(intv_cost, comp_cost, intv_qaly, comp_qaly);
+
+    // ===== 1. Summary Table =====
+    V('summary-body').innerHTML = `
+        <tr>
+            <td class="font-medium">비용 (Cost)</td>
+            <td class="text-right">${fmtCost(intv_cost)}</td>
+            <td class="text-right">${fmtCost(comp_cost)}</td>
+            <td class="text-right font-semibold">${fmtCost(dc)}</td>
+        </tr>
+        <tr>
+            <td class="font-medium">효과 (QALY)</td>
+            <td class="text-right">${fmt(intv_qaly, 3)}</td>
+            <td class="text-right">${fmt(comp_qaly, 3)}</td>
+            <td class="text-right font-semibold">${fmt(de, 3)}</td>
+        </tr>
+        <tr class="bg-blue-50">
+            <td class="font-bold" colspan="3">ICER (Incremental Cost-Effectiveness Ratio)</td>
+            <td class="text-right font-bold text-lg text-blue-700">${isFinite(icer) ? fmtCost(Math.round(icer)) + '/QALY' : 'Dominated'}</td>
+        </tr>
+    `;
+
+    const ceResult = isFinite(icer) && icer <= wtp
+        ? `<span class="text-green-700 font-bold">비용-효과적</span> (ICER ${fmtCost(Math.round(icer))}/QALY &le; WTP ${fmtCost(wtp)}/QALY)`
+        : de <= 0
+            ? `<span class="text-red-700 font-bold">Dominated</span> (효과가 더 낮거나 같음)`
+            : `<span class="text-orange-700 font-bold">비용-효과적이지 않음</span> (ICER ${fmtCost(Math.round(icer))}/QALY > WTP ${fmtCost(wtp)}/QALY)`;
+
+    V('icer-result').innerHTML = `<p class="text-sm"><strong>결론:</strong> ${intv_name}은(는) ${comp_name} 대비 ${ceResult}</p>`;
+
+    // ===== 2. PSA - CE Plane =====
+    const psaData = [];
+    for (let i = 0; i < nSim; i++) {
+        const sc1 = intv_cost + intv_cost_sd * randn();
+        const sc0 = comp_cost + comp_cost_sd * randn();
+        const se1 = intv_qaly + intv_qaly_sd * randn();
+        const se0 = comp_qaly + comp_qaly_sd * randn();
+        psaData.push({ x: se1 - se0, y: sc1 - sc0 });
+    }
+
+    if (cePlaneChartInst) cePlaneChartInst.destroy();
+
+    // Calculate WTP line endpoints
+    const xMin = Math.min(...psaData.map(p => p.x)) * 1.1;
+    const xMax = Math.max(...psaData.map(p => p.x)) * 1.1;
+
+    cePlaneChartInst = new Chart(V('cePlaneChart').getContext('2d'), {
+        type: 'scatter',
+        data: {
+            datasets: [
+                {
+                    label: 'PSA Simulations',
+                    data: psaData,
+                    backgroundColor: 'rgba(37, 99, 235, 0.25)',
+                    borderColor: 'rgba(37, 99, 235, 0.5)',
+                    pointRadius: 2.5,
+                    pointHoverRadius: 5,
+                },
+                {
+                    label: `WTP Threshold (${fmtCost(wtp)}/QALY)`,
+                    data: [{ x: xMin, y: xMin * wtp }, { x: xMax, y: xMax * wtp }],
+                    type: 'line',
+                    borderColor: 'rgba(220, 38, 38, 0.7)',
+                    borderDash: [8, 4],
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    fill: false,
+                },
+                {
+                    label: 'Base-case ICER',
+                    data: [{ x: de, y: dc }],
+                    backgroundColor: 'rgba(220, 38, 38, 1)',
+                    borderColor: '#fff',
+                    pointRadius: 8,
+                    pointStyle: 'crossRot',
+                    borderWidth: 2,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `\u0394Effect: ${ctx.parsed.x.toFixed(3)}, \u0394Cost: ${fmt(ctx.parsed.y)}`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Incremental Effectiveness (\u0394QALY)', font: { size: 13, weight: 'bold' } },
+                    grid: { color: ctx => ctx.tick.value === 0 ? '#000' : '#e5e7eb' }
+                },
+                y: {
+                    title: { display: true, text: 'Incremental Cost (\u0394Cost)', font: { size: 13, weight: 'bold' } },
+                    grid: { color: ctx => ctx.tick.value === 0 ? '#000' : '#e5e7eb' },
+                    ticks: { callback: v => fmtCost(v) }
+                }
+            }
+        }
+    });
+
+    // ===== 3. Tornado Diagram =====
+    const saRanges = [
+        { label: `${intv_name} Cost`, base: intv_cost, pct: N('sa_intv_cost'), calc: v => calcICER(v, comp_cost, intv_qaly, comp_qaly) },
+        { label: `${comp_name} Cost`, base: comp_cost, pct: N('sa_comp_cost'), calc: v => calcICER(intv_cost, v, intv_qaly, comp_qaly) },
+        { label: `${intv_name} QALY`, base: intv_qaly, pct: N('sa_intv_qaly'), calc: v => calcICER(intv_cost, comp_cost, v, comp_qaly) },
+        { label: `${comp_name} QALY`, base: comp_qaly, pct: N('sa_comp_qaly'), calc: v => calcICER(intv_cost, comp_cost, intv_qaly, v) },
+    ];
+
+    const tornadoData = saRanges.map(p => {
+        const lo = p.base * (1 - p.pct / 100);
+        const hi = p.base * (1 + p.pct / 100);
+        const icerLo = p.calc(lo);
+        const icerHi = p.calc(hi);
+        return {
+            label: p.label,
+            baseCost: p.base,
+            lo, hi,
+            icerLo: isFinite(icerLo) ? icerLo : icer * 3,
+            icerHi: isFinite(icerHi) ? icerHi : icer * 3,
+            range: Math.abs((isFinite(icerHi) ? icerHi : icer * 3) - (isFinite(icerLo) ? icerLo : icer * 3))
+        };
+    }).sort((a, b) => b.range - a.range);
+
+    if (tornadoChartInst) tornadoChartInst.destroy();
+
+    tornadoChartInst = new Chart(V('tornadoChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: tornadoData.map(d => d.label),
+            datasets: [
+                {
+                    label: 'Low estimate',
+                    data: tornadoData.map(d => d.icerLo - icer),
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1,
+                },
+                {
+                    label: 'High estimate',
+                    data: tornadoData.map(d => d.icerHi - icer),
+                    backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                    borderColor: 'rgba(239, 68, 68, 1)',
+                    borderWidth: 1,
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `ICER: ${fmtCost(Math.round(ctx.parsed.x + icer))}/QALY`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Change in ICER from base-case', font: { size: 12, weight: 'bold' } },
+                    ticks: { callback: v => fmtCost(v) }
+                }
+            }
+        }
+    });
+
+    // ===== 4. CEAC =====
+    const wtpRange = [];
+    const ceacProb = [];
+    const wtpMax = wtp * 3;
+    const wtpStep = wtpMax / 50;
+
+    for (let w = 0; w <= wtpMax; w += wtpStep) {
+        wtpRange.push(w);
+        let ceCount = 0;
+        for (const p of psaData) {
+            const nmb = w * p.x - p.y; // NMB = WTP * deltaE - deltaC
+            if (nmb >= 0) ceCount++;
+        }
+        ceacProb.push(ceCount / nSim);
+    }
+
+    if (ceacChartInst) ceacChartInst.destroy();
+
+    ceacChartInst = new Chart(V('ceacChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: wtpRange,
+            datasets: [{
+                label: `P(${intv_name} is cost-effective)`,
+                data: ceacProb,
+                borderColor: 'rgba(37, 99, 235, 1)',
+                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                fill: true,
+                tension: 0.3,
+                borderWidth: 2.5,
+                pointRadius: 0,
+                pointHoverRadius: 5,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                tooltip: {
+                    callbacks: {
+                        title: items => `WTP: ${fmtCost(items[0].parsed.x)}/QALY`,
+                        label: ctx => `P(CE): ${(ctx.parsed.y * 100).toFixed(1)}%`
+                    }
+                },
+                annotation: {
+                    annotations: {
+                        wtpLine: {
+                            type: 'line',
+                            xMin: wtp, xMax: wtp,
+                            borderColor: 'red',
+                            borderDash: [5, 5],
+                            borderWidth: 1,
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Willingness-to-Pay (WTP) per QALY', font: { size: 12, weight: 'bold' } },
+                    ticks: { callback: v => fmtCost(v), maxTicksLimit: 10 }
+                },
+                y: {
+                    title: { display: true, text: 'Probability cost-effective', font: { size: 12, weight: 'bold' } },
+                    min: 0, max: 1,
+                    ticks: { callback: v => (v * 100) + '%' }
+                }
+            }
+        }
+    });
+
+    // ===== 5. Publication Tables =====
+    // Table 1
+    V('pub-table-1-body').innerHTML = `
+        <tr>
+            <td>${comp_name}</td>
+            <td class="text-right">${fmtCost(comp_cost)}</td>
+            <td class="text-right">-</td>
+            <td class="text-right">${fmt(comp_qaly, 3)}</td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+        </tr>
+        <tr>
+            <td>${intv_name}</td>
+            <td class="text-right">${fmtCost(intv_cost)}</td>
+            <td class="text-right">${fmtCost(dc)}</td>
+            <td class="text-right">${fmt(intv_qaly, 3)}</td>
+            <td class="text-right">${fmt(de, 3)}</td>
+            <td class="text-right">${isFinite(icer) ? fmtCost(Math.round(icer)) : 'Dominated'}</td>
+        </tr>
+    `;
+    V('pub-table-1-footer').textContent = `ICER, incremental cost-effectiveness ratio; QALY, quality-adjusted life year. WTP threshold = ${fmtCost(wtp)}/QALY. Discount rate = ${V('discount_rate').value}%.`;
+
+    // Table 2
+    V('pub-table-2-body').innerHTML = tornadoData.map(d => `
+        <tr>
+            <td>${d.label}</td>
+            <td class="text-right">${d.label.includes('QALY') ? fmt(d.baseCost, 3) : fmtCost(d.baseCost)}</td>
+            <td class="text-right">${d.label.includes('QALY') ? fmt(d.lo, 3) : fmtCost(d.lo)}</td>
+            <td class="text-right">${d.label.includes('QALY') ? fmt(d.hi, 3) : fmtCost(d.hi)}</td>
+            <td class="text-right">${isFinite(d.icerLo) ? fmtCost(Math.round(d.icerLo)) : 'Dominated'}</td>
+            <td class="text-right">${isFinite(d.icerHi) ? fmtCost(Math.round(d.icerHi)) : 'Dominated'}</td>
+        </tr>
+    `).join('');
+
+    // Show results
+    V('results').classList.remove('hidden');
+    V('results').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
