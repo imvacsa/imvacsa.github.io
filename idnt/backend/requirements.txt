@@ -1,0 +1,23 @@
+# IDNT (아이덴트) Backend Dependencies
+# Install: pip install -r requirements.txt
+# For GPU support: pip install onnxruntime-gpu instead of onnxruntime
+
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pillow==11.1.0
+rembg==2.0.62
+insightface==0.7.3
+onnxruntime==1.20.1
+numpy==1.26.4
+qrcode[pil]==8.0
+python-multipart==0.0.19
+boto3==1.36.4
+pydantic==2.10.5
+pydantic-settings==2.7.1
+sqlalchemy[asyncio]==2.0.37
+asyncpg==0.30.0
+pgvector==0.3.6
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+httpx==0.28.1
+aiofiles==24.1.0
