@@ -44,7 +44,7 @@ class CameraManager: NSObject, ObservableObject {
     @Published var isCaptured: Bool = false
 
     private var lastProcessTime: Date = .distantPast
-    private let processInterval: TimeInterval = 1.0 / 30.0
+    private let processInterval: TimeInterval = 1.0 / 60.0 // 60fps processing
     private var isCapturing = false
 
     func startSession() {
@@ -113,7 +113,11 @@ class CameraManager: NSObject, ObservableObject {
                 return
             }
 
-            let result = self.evaluateQuality(face: face, imageSize: CVPixelBufferGetSize(pixelBuffer))
+            let imageSize = CGSize(
+                width: CGFloat(CVPixelBufferGetWidth(pixelBuffer)),
+                height: CGFloat(CVPixelBufferGetHeight(pixelBuffer))
+            )
+            let result = self.evaluateQuality(face: face, imageSize: imageSize)
 
             Task { @MainActor in
                 self.qualityResult = result
@@ -140,7 +144,7 @@ class CameraManager: NSObject, ObservableObject {
             return .failure(.faceTooSmall)
         }
 
-        // Check frontal pose (yaw and pitch within +/-15 degrees)
+        // Check frontal pose: yaw within +/-15 degrees
         if let yaw = face.yaw?.doubleValue {
             let yawDegrees = yaw * 180.0 / .pi
             guard abs(yawDegrees) <= 15 else {
@@ -148,6 +152,7 @@ class CameraManager: NSObject, ObservableObject {
             }
         }
 
+        // Check frontal pose: pitch within +/-15 degrees
         if let pitch = face.pitch?.doubleValue {
             let pitchDegrees = pitch * 180.0 / .pi
             guard abs(pitchDegrees) <= 15 else {
@@ -155,7 +160,7 @@ class CameraManager: NSObject, ObservableObject {
             }
         }
 
-        // Check eye detection
+        // Check eye detection (both eyes must be visible)
         if let landmarks = face.landmarks {
             guard landmarks.leftEye != nil, landmarks.rightEye != nil else {
                 return .failure(.eyesNotVisible)
@@ -177,13 +182,6 @@ extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate {
         let manager = self
         manager.processFrame(sampleBuffer)
     }
-}
-
-private func CVPixelBufferGetSize(_ buffer: CVPixelBuffer) -> CGSize {
-    CGSize(
-        width: CGFloat(CVPixelBufferGetWidth(buffer)),
-        height: CGFloat(CVPixelBufferGetHeight(buffer))
-    )
 }
 
 // MARK: - Face Capture View
@@ -219,7 +217,7 @@ struct FaceCaptureView: View {
                 .ignoresSafeArea()
                 .opacity(0.7)
 
-            // Dimming overlay with circle cutout
+            // Dimming overlay with circular cutout
             Canvas { context, size in
                 let rect = CGRect(origin: .zero, size: size)
                 let circleRect = CGRect(
@@ -238,7 +236,7 @@ struct FaceCaptureView: View {
             VStack(spacing: 0) {
                 Spacer()
 
-                // Pulsating circle frame
+                // Pulsating circle frame with spring-based breathing animation
                 Circle()
                     .strokeBorder(frameColor, lineWidth: 3)
                     .frame(width: circleSize, height: circleSize)
@@ -248,12 +246,13 @@ struct FaceCaptureView: View {
                 Spacer()
                     .frame(height: 60)
 
-                // Status text
+                // Status text (single line)
                 Text(statusText)
                     .font(IDNTDesign.secondaryFont())
                     .foregroundStyle(frameColor)
                     .multilineTextAlignment(.center)
-                    .animation(.easeInOut(duration: 0.2), value: statusText)
+                    .lineLimit(1)
+                    .animation(IDNTDesign.springAnimation, value: statusText)
 
                 Spacer()
                     .frame(height: 80)
@@ -261,7 +260,7 @@ struct FaceCaptureView: View {
         }
         .onAppear {
             cameraManager.startSession()
-            startPulseAnimation()
+            startBreathingAnimation()
         }
         .onDisappear {
             cameraManager.stopSession()
@@ -277,7 +276,8 @@ struct FaceCaptureView: View {
         }
     }
 
-    private func startPulseAnimation() {
+    private func startBreathingAnimation() {
+        // Soft breathing animation using spring physics
         withAnimation(
             .spring(response: 1.5, dampingFraction: 0.5)
             .repeatForever(autoreverses: true)
