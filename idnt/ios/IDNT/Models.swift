@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - Data Models
 
-struct Employee: Codable, Identifiable {
+struct Employee: Codable, Identifiable, Sendable {
     let id: String
     let employeeNumber: String
     let name: String
@@ -10,7 +10,7 @@ struct Employee: Codable, Identifiable {
     let position: String
 }
 
-struct CaptureResponse: Codable {
+struct CaptureResponse: Codable, Sendable {
     let success: Bool
     let applePassURL: String?
     let googlePassURL: String?
@@ -26,7 +26,7 @@ struct CaptureResponse: Codable {
     }
 }
 
-struct QualityCheckResult {
+struct QualityCheckResult: Equatable {
     let passed: Bool
     let reason: QualityFailReason?
     let message: String?
@@ -34,11 +34,15 @@ struct QualityCheckResult {
     static let success = QualityCheckResult(passed: true, reason: nil, message: nil)
 
     static func failure(_ reason: QualityFailReason) -> QualityCheckResult {
-        return QualityCheckResult(passed: false, reason: reason, message: reason.koreanMessage)
+        QualityCheckResult(passed: false, reason: reason, message: reason.koreanMessage)
+    }
+
+    static func == (lhs: QualityCheckResult, rhs: QualityCheckResult) -> Bool {
+        lhs.passed == rhs.passed && lhs.reason == rhs.reason
     }
 }
 
-enum QualityFailReason {
+enum QualityFailReason: Equatable {
     case lowLight
     case notFrontal
     case faceTooSmall
@@ -61,7 +65,7 @@ enum QualityFailReason {
     }
 }
 
-struct CardStatus: Codable, Identifiable {
+struct CardStatus: Codable, Identifiable, Sendable {
     let id: String
     let status: String
     let issuedAt: String
@@ -75,7 +79,7 @@ struct CardStatus: Codable, Identifiable {
     }
 }
 
-// MARK: - Design System
+// MARK: - Design System Constants
 
 enum IDNTDesign {
     // Colors
@@ -86,6 +90,8 @@ enum IDNTDesign {
     static let error = Color(hex: 0xFF453A)
 
     // Typography
+    // Max 2 font sizes per screen: main 28pt Bold, secondary 15pt Regular
+    // SF Pro Display for English, system font for Korean (system font handles both)
     static let mainSize: CGFloat = 28
     static let secondarySize: CGFloat = 15
 
@@ -105,13 +111,14 @@ enum IDNTDesign {
         .system(size: size, weight: .regular, design: .monospaced)
     }
 
-    // Animation
+    // Animations: 60fps spring physics, no bounce (dampingFraction = 1.0)
     static let springAnimation = Animation.spring(
         response: 0.5,
         dampingFraction: 1.0,
         blendDuration: 0
     )
 
+    // Card entrance spring (slightly more playful for the drop-in effect)
     static let cardSpring = Animation.spring(
         response: 0.6,
         dampingFraction: 0.85,

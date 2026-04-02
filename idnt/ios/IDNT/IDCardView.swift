@@ -37,7 +37,7 @@ struct IDCardView: View {
     @ViewBuilder
     private func cardFront(width: CGFloat, height: CGFloat) -> some View {
         ZStack {
-            // Background with subtle gradient
+            // Black matte background with subtle gradient
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(
                     LinearGradient(
@@ -56,11 +56,12 @@ struct IDCardView: View {
                 .strokeBorder(Color.white.opacity(0.08), lineWidth: 1)
 
             VStack(alignment: .leading, spacing: 0) {
-                // Top row: company logo
+                // Top-left: company logo (embossed look)
                 HStack {
                     Text("IDNT")
                         .font(.system(size: 18, weight: .bold, design: .default))
                         .foregroundStyle(Color.white.opacity(0.3))
+                        .shadow(color: .black, radius: 1, x: 0, y: 1)
 
                     Spacer()
                 }
@@ -69,9 +70,9 @@ struct IDCardView: View {
 
                 Spacer()
 
-                // Center content
+                // Center content: photo left, info right
                 HStack(alignment: .center, spacing: 16) {
-                    // Photo circle
+                    // Circular photo (left side)
                     if let photo = photo {
                         Image(uiImage: photo)
                             .resizable()
@@ -91,12 +92,12 @@ struct IDCardView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        // Name
+                        // Name: large white text
                         Text(employee.name)
                             .font(.system(size: 22, weight: .bold))
                             .foregroundStyle(.white)
 
-                        // Position
+                        // Position: smaller gray text
                         Text(employee.position)
                             .font(.system(size: 13, weight: .regular))
                             .foregroundStyle(Color.white.opacity(0.5))
@@ -115,7 +116,7 @@ struct IDCardView: View {
 
                 // Bottom row
                 HStack(alignment: .bottom) {
-                    // Employee number - laser-engraved style
+                    // Employee ID: monospace, laser-engraved style
                     Text(employee.employeeNumber)
                         .font(.system(size: 11, weight: .regular, design: .monospaced))
                         .foregroundStyle(Color.white.opacity(0.25))
@@ -123,7 +124,7 @@ struct IDCardView: View {
 
                     Spacer()
 
-                    // QR code
+                    // QR code: bottom-right, 50% opacity (tap to full)
                     if let qrImage = generateQRCode(from: employee.employeeNumber) {
                         Image(uiImage: qrImage)
                             .interpolation(.none)
@@ -131,7 +132,7 @@ struct IDCardView: View {
                             .frame(width: 44, height: 44)
                             .opacity(qrFullOpacity ? 1.0 : 0.5)
                             .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.2)) {
+                                withAnimation(IDNTDesign.springAnimation) {
                                     qrFullOpacity.toggle()
                                 }
                             }
@@ -187,9 +188,9 @@ struct IDCardView: View {
 
                 Spacer()
 
-                // Bottom info
+                // Bottom info: expiry date + barcode
                 HStack {
-                    // Expiry
+                    // Expiry: bottom-left MM/YY
                     VStack(alignment: .leading, spacing: 2) {
                         Text("VALID THRU")
                             .font(.system(size: 8, weight: .medium, design: .monospaced))
@@ -229,13 +230,15 @@ struct IDCardView: View {
         let transform = CGAffineTransform(scaleX: 10, y: 10)
         let scaledImage = outputImage.transformed(by: transform)
 
-        // Invert colors for dark theme (white QR on transparent)
-        guard let invertFilter = CIFilter(name: "CIColorInvert") else { return nil }
+        // Invert colors for dark theme (white QR on transparent background)
+        guard let invertFilter = CIFilter(name: "CIColorInvert") else {
+            guard let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) else { return nil }
+            return UIImage(cgImage: cgImage)
+        }
         invertFilter.setValue(scaledImage, forKey: kCIInputImageKey)
 
         guard let invertedImage = invertFilter.outputImage,
               let cgImage = context.createCGImage(invertedImage, from: invertedImage.extent) else {
-            // Fallback without inversion
             guard let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) else { return nil }
             return UIImage(cgImage: cgImage)
         }

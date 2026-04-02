@@ -23,9 +23,9 @@ struct ProcessingView: View {
             VStack(spacing: 0) {
                 Spacer()
 
-                // Captured photo with progress ring
+                // Captured photo with iPod click-wheel style progress ring
                 ZStack {
-                    // Circular progress ring
+                    // Thin circular progress arc (primary)
                     Circle()
                         .trim(from: 0, to: 0.25)
                         .stroke(
@@ -35,6 +35,7 @@ struct ProcessingView: View {
                         .frame(width: circleSize + 16, height: circleSize + 16)
                         .rotationEffect(.degrees(rotationAngle))
 
+                    // Secondary arc for click-wheel effect
                     Circle()
                         .trim(from: 0.5, to: 0.65)
                         .stroke(
@@ -44,7 +45,7 @@ struct ProcessingView: View {
                         .frame(width: circleSize + 16, height: circleSize + 16)
                         .rotationEffect(.degrees(rotationAngle))
 
-                    // Photo circle
+                    // Captured face photo as circle
                     Image(uiImage: capturedImage)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -55,7 +56,7 @@ struct ProcessingView: View {
                 Spacer()
                     .frame(height: 80)
 
-                // Status text
+                // Sequential status text
                 Text(statusMessages[min(statusIndex, statusMessages.count - 1)])
                     .font(IDNTDesign.secondaryFont())
                     .foregroundStyle(IDNTDesign.primary.opacity(0.7))
@@ -86,9 +87,10 @@ struct ProcessingView: View {
     }
 
     private func startStatusCycle() {
+        // Each status message shown for ~1 second
         for i in 1..<statusMessages.count {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 1.0) {
-                withAnimation(.easeInOut(duration: 0.3)) {
+                withAnimation(IDNTDesign.springAnimation) {
                     statusIndex = i
                 }
             }
@@ -103,13 +105,13 @@ struct ProcessingView: View {
                     imageData: imageData,
                     employeeId: "demo"
                 )
-                // Ensure minimum display time of 3 seconds
-                try await Task.sleep(for: .seconds(max(0, 3.0)))
+                // Ensure minimum display time of 3 seconds for the processing animation
+                try await Task.sleep(for: .seconds(3.0))
                 await MainActor.run {
                     onComplete(response)
                 }
             } catch {
-                // Fallback with mock data after processing animation
+                // Fallback with mock data after processing animation completes
                 try? await Task.sleep(for: .seconds(3.0))
                 let mockResponse = CaptureResponse(
                     success: true,

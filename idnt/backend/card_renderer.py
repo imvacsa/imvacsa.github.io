@@ -455,12 +455,16 @@ def _render_back(employee_data: dict) -> Image.Image:
 # Public API
 # ---------------------------------------------------------------------------
 
-def render_id_card(
+async def render_id_card(
     photo_bytes: Optional[bytes],
     employee_data: dict,
     card_type: str = "front",
 ) -> bytes:
     """Render an ID card and return PNG bytes.
+
+    This function is async-compatible for use with FastAPI. The actual
+    rendering is CPU-bound and runs synchronously, but the async signature
+    allows seamless integration with the async pipeline in main.py.
 
     Parameters
     ----------
@@ -470,7 +474,8 @@ def render_id_card(
     employee_data:
         Dictionary containing at minimum:
         ``name``, ``department``, ``position``, ``employee_number``,
-        ``company_name``.  Optional: ``valid_thru`` (e.g. ``"03/27"``).
+        ``company_name``.  Optional: ``valid_thru`` (e.g. ``"03/27"``)
+        or ``expires_at`` (datetime / ISO string, auto-converted to MM/YY).
     card_type:
         ``"front"`` or ``"back"``.
 
@@ -479,6 +484,18 @@ def render_id_card(
     bytes
         PNG-encoded image of the card.
     """
+    # Auto-convert expires_at to valid_thru if not explicitly provided
+    if "valid_thru" not in employee_data and "expires_at" in employee_data:
+        from datetime import datetime as _dt
+        exp = employee_data["expires_at"]
+        if isinstance(exp, _dt):
+            employee_data = {**employee_data, "valid_thru": exp.strftime("%m/%y")}
+        elif isinstance(exp, str):
+            try:
+                employee_data = {**employee_data, "valid_thru": _dt.fromisoformat(exp).strftime("%m/%y")}
+            except ValueError:
+                pass
+
     if card_type == "back":
         card = _render_back(employee_data)
     else:
