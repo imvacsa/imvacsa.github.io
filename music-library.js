@@ -6,10 +6,7 @@
     return node;
   }
   for (const list of document.querySelectorAll('[data-album-list]')) {
-    const limit = Number(list.dataset.limit) || albums.length;
-    const entries = Array.from(albums.entries());
-    const visible = list.dataset.limit ? entries.slice().reverse().slice(0,limit) : entries;
-    for (const [index, album] of visible) {
+    for (const [index, album] of albums.entries()) {
       const link = element('a','album-card');
       link.href = `album.html?id=${encodeURIComponent(album.id)}`;
       const art = element('div','album-cover'); art.setAttribute('aria-hidden','true');
