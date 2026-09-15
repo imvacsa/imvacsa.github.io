@@ -156,5 +156,54 @@ const albums = [
         "lyrics": "[Intro]\n(Haunting operatic vocalizations)\n(Low, rumbling dissonant choir chant)\n\n[Verse 1]\n낯선 공기 속에 갇혀 숨이 막혀와\n눈을 떠보니 난 다른 세계에 있어\n모든 미소가 칼날처럼 날 찢어대고\n너희의 친절은 차가운 가면에 불과해\n말을 잃어버린 아이의 눈빛 속에서\n피어나는 건 검붉은 분노와 공포뿐\n더는 참을 수 없어 이 모든 가식들을\n내 안의 괴물이 눈을 뜨기 시작했어\n\n[Chorus]\nSystem shock! All systems overload!\n다 부숴버려, 이 위선의 벽을!\n나는 더 이상 순종하는 인형이 아냐!\n폭발하는 분노가 온몸을 휘감아!\nErase the code! Delete my memory!\n이방인의 눈물은 이제 끝났다!\n\n[Verse 2]\n감각의 과부하, 모든 게 뒤엉켜가\n내 목소리는 저 소음 속으로 사라져\nI'm a glitch, a virus in your system!\n나를 고치려 하지 마, 난 고장 난 게 아냐!\n이질적인 문화는 내 숨통을 조여오고\n고립된 섬에서 난 매일 서서히 죽어가\n하지만 이제는 아냐, 내가 널 파괴할 테니!\n분노의 불꽃이 이 감옥을 다 태울 거야!\n\n[Chorus]\nSystem shock! All systems overload!\n다 부숴버려, 이 위선의 벽을!\n나는 더 이상 순종하는 인형이 아냐!\n폭발하는 분노가 온몸을 휘감아!\nErase the code! Delete my memory!\n이방인의 눈물은 이제 끝났다!\n\n[Bridge]\n(Guttural growls and shrieks of pure agony)\nI am... breaking... apart!\n(Heavy, labored breathing and glitch sounds)\nNo more... lies!\n\n[Chorus]\nSystem shock! All systems overload!\n다 부숴버려, 이 위선의 벽을!\n나는 더 이상 순종하는 인형이 아냐!\n폭발하는 분노가 온몸을 휘감아!\nErase the code! Delete my memory!\n이방인의 눈물은 이제 끝났다!\n\n[Outro]\n(Digital static and fading electronic hums)\n(Faint, distant choir chant trails off into nothing)"
       }
     ]
+  },
+  {
+    "id": "serenity-and-rest",
+    "title": "평온과 안식의 기록",
+    "english": "The Suite of Serenity & Rest",
+    "coverTitle": "평온과\n안식의 기록",
+    "description": "긴 하루 끝에 찾아온 고요, 아침의 온기, 가족의 다정한 목소리. 편안히 쉬어 가는 마음을 담은 다섯 곡.",
+    "dedication": "평온을 위한 다섯 곡",
+    "trackHeading": "다섯 번의 고요한 숨",
+    "letter": "잠시 멈추어 천천히 숨을 쉬어 봅니다.\n\n따스한 빛과 익숙한 목소리 곁에서, 오늘의 마음이 편안히 쉴 수 있기를.",
+    "footer": "평온한 오늘, 포근한 내일.",
+    "credit": "MUSIC WITH GEMINI",
+    "tracks": [
+      {
+        "title": "이제야 숨을 쉬네요",
+        "genre": "Alternative R&B",
+        "duration": 180,
+        "src": "serenity-and-rest-01.mp4",
+        "lyrics": "[Verse 1]\n긴 밤이 지나고\n눈을 감아요\n이제야 숨을 쉬네요\n모든 게 고요해\n차가운 바람도\n나를 안아주네\n더는 아프지 않아\n여기가 내 집이죠\n\n[Chorus]\n나 감사해\n이 평온함에\n다 지나갔죠\n난 이제 쉬어요\n\n[Verse 2]\n파도는 잠들고\n마음이 맑아요\n작은 빛 하나면 충분해\n이대로 머물고 싶어\n두려움은 멀리\n흔적도 없네요\n따스한 침묵 속에\n난 온전히 나예요\n\n[Chorus]\n나 감사해\n이 평온함에\n다 지나갔죠\n난 이제 쉬어요\n\n[Bridge]\n어둠은 가고\n아침이 밝아와도\n내 맘은 흔들리지 않아\n영원히 이대로\n나를 찾았죠\n이제야 알겠어\n이 고요함이\n가장 큰 축복이란 걸\n\n[Chorus]\n나 감사해\n이 평온함에\n다 지나갔죠\n난 이제 쉬어요\n\n[Outro]\n(조용히) 눈을 감아도\n두렵지 않아 (내 맘에)\n(참 편안해) 나 감사해\n이 모든 것에 (안도하며)"
+      },
+      {
+        "title": "작은 천국",
+        "genre": "Alternative R&B / Neo-Soul",
+        "duration": 155.500333,
+        "src": "serenity-and-rest-02.mp4",
+        "lyrics": "[Verse 1]\n조용히 다가와\n아침의 빛줄기\n창가에 머물러\n온기를 전하네\n가만히 눈을 떠\n모든 게 고요해\n이제는 괜찮아\n두려움은 없어\n\n[Chorus]\n평온한 마음\n참 고마워\n졸린 눈으로\n웃어보네\n여기가 나의\n작은 천국\n스르륵 다시\n잠이 들어\n\n[Verse 2]\n나뭇잎 사이로\n반짝이는 숨결\n새들의 노래에\n가슴이 따뜻해\n천천히 숨을 쉬어\n이 순간이 좋아\n더 이상 아프지\n않을 것만 같아\n\n[Chorus]\n평온한 마음\n참 고마워\n졸린 눈으로\n웃어보네\n여기가 나의\n작은 천국\n스르륵 다시\n잠이 들어\n\n[Bridge]\n작은 손가락에\n닿는 이 온기\n세상이 나를 향해\n웃어주는 것 같아\n\n[Outro]\n안녕... 나의 하루\n이젠 정말 괜찮아\n참 고마워... 아침아\n스르륵... 잠이 든다"
+      },
+      {
+        "title": "포근한 밤의 고요",
+        "genre": "Neo-Soul / R&B",
+        "duration": 168.700333,
+        "src": "serenity-and-rest-03.mp4",
+        "lyrics": "[Verse 1]\n작은 두 손을 가만히 모으고\n조용히 눈을 감아봅니다\n오늘의 서러움은 다 멀리 가고\n다정한 온기만 내 곁에 남아요\n별 하나가 창가에 머물면\n난 더 이상 외롭지 않아요\n엄마의 따스한 숨소리에\n기분 좋은 꿈이 피어나요\n\n[Chorus]\n따스한 이 공간속에\n우리 함께 머물러요\n참 고마운 이 시간\n눈부시게 아늑해요\n참 고마운 이 시간\n꿈결처럼 아늑해요\n\n[Verse 2]\n지쳤던 맘이 사르르 녹아내려\n새하얀 구름 위에 누운 듯해요\n밤하늘은 우리를 감싸 안고\n반짝이는 토닥임을 보내주네요\n참 다행이야 함께 있어서\n이 모든 두려움이 사라져요\n조금씩 다가오는 아침도\n이제는 웃으며 맞이할게요\n\n[Chorus]\n참 고마운 이 시간\n아름답게 펼쳐져요\n온 세상이 다정해\n포근하게 안아줘요\n포근하게 안아줘요\n\n[Chorus 2]\n참 고마운 이 시간\n우리 함께 머물러요\n영원토록 간직할\n이 고요를 사랑해요\n이 고요를 사랑해요\n\n[Outro]\n다시 찾아온 평온에\n조용히 감사드리며\n깊은 잠에 빠져들어요\n(잘 자요)"
+      },
+      {
+        "title": "눈을 감으면",
+        "genre": "Ambient Neo-Soul",
+        "duration": 180,
+        "src": "serenity-and-rest-04.mp4",
+        "lyrics": "[Verse 1 (모녀 대화)]\n(아이) 엄마 졸려\n(엄마) 눈을 감아\n(아이) 어디 가요\n(엄마) 여기 있어\n(아이) 무서워요\n(엄마) 곁에 있을게\n(아이) 정말 그래요\n(엄마) 약속할게\n\n[Chorus (모녀 합창)]\n잘 자라 우리 아이\n예쁜 꿈꿔라\n내가 지킬게\n편히 쉬어라\n고마운 우리 딸\n사랑한다 아가야\n눈을 감으렴\n우리 작은 아가\n\n[Outro (Ritardando & 가족 앙상블)]\n(점점 느려지며)\n이제 다 왔다\n우리 함께해\n눈을 감으면\n안녕 내일 만나\n(남동생 웃음소리 섞이며)\n잘 자요\n사랑해요 우리 가족\n안녕 안녕"
+      },
+      {
+        "title": "평화가 나를 감싸네",
+        "genre": "Alternative R&B",
+        "duration": 164.633333,
+        "src": "serenity-and-rest-05.mp4",
+        "lyrics": "[Verse 1]\n구름도 낮게 잠들고\n바람은 길을 잃었네\n내 맘의 소란스러움도\n어디론가 다 사라져\n\n[Chorus]\n이제 괜찮아 고요해\n평화가 나를 감싸네\n천천히 숨을 쉬어봐\n모든 게 잠든 이 밤에\n\n[Verse 2]\n어제의 아픔은 잊고\n기억의 파도도 멈춰\n오직 이 고요 속에서\n나만이 온전히 남아\n\n[Chorus]\n이제 괜찮아 고요해\n평화가 나를 감싸네\n천천히 숨을 쉬어봐\n모든 게 잠든 이 밤에\n\n[Outro]\n가만히\n다 괜찮아\n평온해"
+      }
+    ]
   }
 ];
