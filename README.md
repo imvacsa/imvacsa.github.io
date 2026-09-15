@@ -1,0 +1,40 @@
+# 임주원 교수 연구소 · 음악과 일상
+
+GitHub Pages 정적 사이트입니다. 홈페이지의 기존 연구·소개 콘텐츠에 음악 섹션을 연결했습니다.
+
+- `index.html`: 홈페이지. 앨범 목록의 앞 3개를 자동 표시합니다.
+- `music.html`: 전체 앨범 목록. 개수에 맞게 카드가 늘어납니다.
+- `album.html?id=southern-sky`: 앨범 감상 페이지. 모든 앨범이 같은 플레이어를 사용합니다.
+- `albums.js`: 앨범 정보, 곡 정보, 가사. 배열 순서가 표시 순서입니다.
+- `music-library.css`, `music-library.js`: 목록과 홈페이지 섹션.
+- `album.css`, `album.js`: 앨범 디자인과 재생 기능.
+- `southern-sky-01.mp4` ~ `southern-sky-06.mp4`: 기존 앨범의 원본 음원 영상. 오디오로 재생합니다.
+
+## 새 앨범 추가
+
+1. 새 음원을 저장소에 올립니다. 파일명은 `new-album-01.mp4`처럼 앨범별로 구분하세요. 폴더를 쓴다면 `media/new-album/01.mp4` 같은 상대경로도 가능합니다.
+2. `albums.js`의 `albums` 배열에 아래 형식의 객체를 추가합니다. `id`는 영문·숫자·하이픈으로 구성하고 기존 앨범과 겹치지 않게 지정합니다. 공개 후에는 링크 보존을 위해 바꾸지 마세요.
+
+```js
+{
+  id: 'new-album',
+  title: '새 앨범 제목',
+  english: 'English Album Title',
+  coverTitle: '표지에 담을\n짧은 제목',
+  // cover: 'new-album-cover.jpg', // 선택: 표지 이미지가 있으면 사용
+  description: '앨범을 소개하는 짧은 문장',
+  dedication: '앨범에 담은 한마디',
+  trackHeading: '수록곡',
+  letter: '앨범에 담은 이야기',
+  footer: '마지막 인사',
+  credit: '제작 크레딧',
+  tracks: [
+    {title: '첫 번째 곡', genre: 'Pop', duration: 180,
+     src: 'new-album-01.mp4', lyrics: '첫 번째 줄\n두 번째 줄'}
+  ]
+}
+```
+
+`duration`은 초 단위입니다. 곡 수와 총 재생 시간은 자동 계산합니다. 앨범은 한 곡 이상 필요합니다. 음원은 브라우저가 지원하는 MP4/AAC, MP3 등을 사용하세요. 목록 화면에서는 음원을 로드하지 않습니다. 상세 화면에서도 선택한 곡만 로드하며 자동으로 소리를 재생하지 않습니다. 연속 재생은 앨범의 마지막 곡에서 멈춥니다.
+
+새 앨범을 배열 맨 앞에 넣으면 홈페이지에 먼저 표시됩니다. 새 HTML을 만들 필요 없이 `album.html?id=new-album` 주소가 생깁니다. 배포는 GitHub Pages의 기존 설정을 사용합니다.

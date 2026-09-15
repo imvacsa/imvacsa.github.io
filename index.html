@@ -38,6 +38,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
     </style>
+<link rel="stylesheet" href="music-library.css">
 </head>
 <body class="text-gray-800">
 
@@ -49,11 +50,12 @@
                     <h1 class="text-xl md:text-2xl font-bold text-[#1a4d80]">임주원 교수 연구소</h1>
                     <p class="text-xs md:text-sm text-gray-600">서울대학교병원 국제진료센터</p>
                 </div>
-                <div class="hidden md:flex space-x-6 text-sm">
+                <div class="site-links flex flex-wrap gap-x-6 gap-y-3 text-sm">
                     <a href="#about" class="text-gray-700 hover:text-[#2563a8] transition">소개</a>
                     <a href="#research" class="text-gray-700 hover:text-[#2563a8] transition">연구 분야</a>
                     <a href="#team" class="text-gray-700 hover:text-[#2563a8] transition">연구팀</a>
                     <a href="#publications" class="text-gray-700 hover:text-[#2563a8] transition">출판물</a>
+                    <a href="#music" class="text-gray-700 hover:text-[#2563a8] transition">음악과 일상</a>
                     <a href="#contact" class="text-gray-700 hover:text-[#2563a8] transition">연락처</a>
                 </div>
             </div>
@@ -230,6 +232,13 @@
             </div>
         </section>
 
+<section id="music" class="music-section" aria-labelledby="music-title">
+  <div class="music-heading"><div><p class="music-kicker">MUSIC & EVERYDAY LIFE</p><h2 id="music-title">음악과 일상</h2><p>일상의 마음을 담아, 노래로 전하는 이야기.</p></div><a class="music-link" href="music.html">모든 앨범 보기 ↗</a></div>
+  <div data-album-list data-limit="3" class="album-grid"></div>
+  <p class="music-note">새로운 이야기를 담은 앨범들이 이곳에 차곡차곡 더해집니다.</p>
+  <noscript><a href="album.html?id=southern-sky">파란 하늘 아래, 천천히 피어나 — 앨범 보기</a></noscript>
+</section>
+
         <!-- Contact Section -->
         <section id="contact" class="mb-16">
             <div class="text-center mb-10">
@@ -269,5 +278,6 @@
         </div>
     </footer>
 
+<script src="albums.js"></script><script src="music-library.js"></script>
 </body>
 </html>
