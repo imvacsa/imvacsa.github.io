@@ -205,5 +205,42 @@ const albums = [
         "lyrics": "[Verse 1]\n구름도 낮게 잠들고\n바람은 길을 잃었네\n내 맘의 소란스러움도\n어디론가 다 사라져\n\n[Chorus]\n이제 괜찮아 고요해\n평화가 나를 감싸네\n천천히 숨을 쉬어봐\n모든 게 잠든 이 밤에\n\n[Verse 2]\n어제의 아픔은 잊고\n기억의 파도도 멈춰\n오직 이 고요 속에서\n나만이 온전히 남아\n\n[Chorus]\n이제 괜찮아 고요해\n평화가 나를 감싸네\n천천히 숨을 쉬어봐\n모든 게 잠든 이 밤에\n\n[Outro]\n가만히\n다 괜찮아\n평온해"
       }
     ]
+  },
+  {
+    "id": "everyday-carefree",
+    "title": "우당탕탕 매일매일",
+    "english": "Everyday Carefree",
+    "coverTitle": "우당탕탕\n매일매일",
+    "description": "새로운 하루의 설렘과 작은 용기, 친구와 함께하는 즐거움을 담은 네 곡.",
+    "dedication": "씩씩하게 하루를 시작하는 너에게",
+    "trackHeading": "매일매일을 채우는 네 곡",
+    "footer": "우리의 매일매일을 응원해",
+    "credit": "MUSIC WITH GEMINI",
+    "tracks": [
+      {
+        "title": "주머니 속 용기",
+        "duration": 171.500333,
+        "src": "everyday-carefree-01.mp4",
+        "lyrics": "[Intro]\n안녕 새로운 아침을 반겨\n초록 잔디가 춤추는 곳에서\n(라라라 웃으며 걸어갈래)\n자 이제 시작해볼까\n\n[Verse 1]\n하늘빛 바다가 끝없이 넓어\n처음 보는 새들이 노래해\n모두 다 나에게 손짓하네\n두근두근 설레는 맘 가득해\n아침 햇살이 참 따스해\n혼자라도 난 외롭지 않아\n주머니 속 용기를 꼭 쥐고\n한 걸음 더 씩씩하게 걸어\n\n[Pre-Chorus]\n매일 보던 풍경은 달라도\n나를 향한 바람은 똑같아\n크게 숨을 한번 내쉬고서\n저 넓은 세상을 향해 외쳐\n\n[Chorus]\n팡팡 뛰어라 내 심장아\n슝슝 날아라 내 꿈들아\n팅팅 튕겨낼게 걱정들은\n반짝반짝 빛날 내 하루야\n팡팡 뛰어라 더 높이더\n슝슝 달려가 내 꿈으로\n쿵쿵 힘차게 발을 굴러\n난 해낼 수 있어 언제나\n\n[Verse 2]\n학교 가는 길이 넘 신기해\n키 큰 나무들이 인사하네\n너의 손을 잡고 걸어가면\n어디든 다 축제가 될 거야\n영어로 말하는 게 어려워도\n환하게 웃으면 통하잖아\n눈빛으로 전하는 내 맘은\n세상에서 가장 따뜻해\n\n[Chorus]\n팡팡 뛰어라 내 심장아\n슝슝 날아라 내 꿈들아\n팅팅 튕겨낼게 걱정들은\n반짝반짝 빛날 내 하루야\n팡팡 뛰어라 더 높이더\n슝슝 달려가 내 꿈으로\n쿵쿵 힘차게 발을 굴러\n난 해낼 수 있어 언제나\n\n[Outro]\n매일매일 더 빛날 거야\n우리의 멋진 이야기들\n(언제나 널 응원해)\n자, 함께 걸어가볼까"
+      },
+      {
+        "title": "해님이 방긋",
+        "duration": 180,
+        "src": "everyday-carefree-02.mp4",
+        "lyrics": "[Verse 1]\n창문 너머 해님이 방긋\n오늘도 신나게 인사해\n기지개 쭉쭉 팔다리 쭉\n새로운 하루가 시작돼\n\n[Chorus]\n까꿍 까꿍 어디 숨었나\n내 마음속 즐거움 찾아\n룰루 랄라 노래 부르며\n신나게 뛰어놀자\n\n[Verse 2]\n알록달록 예쁜 옷 입고\n나가볼까 신나는 세상\n강아지도 멍멍 꼬리 살랑\n나비도 훨훨 춤을 추네\n\n[Chorus]\n까꿍 까꿍 어디 숨었나\n내 마음속 즐거움 찾아\n룰루 랄라 노래 부르며\n신나게 뛰어놀자\n\n[Bridge]\n작은 구름 몰려와\n무지개 옷 갈아입고\n오늘은 어떤 재미가\n기다릴까 두근두근\n\n[Chorus]\n까꿍 까꿍 어디 숨었나\n내 마음속 즐거움 찾아\n룰루 랄라 노래 부르며\n신나게 뛰어놀자\n\n[Outro]\n야호! 즐거운 하루!\n매일매일 신난다!\n랄랄라!"
+      },
+      {
+        "title": "호주의 하늘 아래",
+        "duration": 178.533333,
+        "src": "everyday-carefree-03.mp4",
+        "lyrics": "[Verse 1]\n새로운 하늘 아래 서있는 너\n낯선 바람이 말을 걸어올 때\n고향의 집이 문득 그리워져\n괜찮아 서둘지 않아도 돼\nThe ocean's wide but so are your dreams\n조금씩 한 걸음 내딛어봐\n\n[Pre-Chorus]\n눈물이 고여도 부끄럽지 않아\n그건 네가 더 깊어지는 거래\n마음의 소리에 귀를 기울여봐\nYou are braver than you know my friend\n\n[Chorus]\nSHINE BRIGHT LIKE THE SKY IN THE SKY\n너의 빛은 언제나 눈부시니까\n두려워하지 마 어깨를 펴고\n너의 걸음으로 걸어가면 돼\nEvery day is a new beginning\n너와 함께 할게 곁에 있을게\n\n[Verse 2]\n학교 가는 길이 아직 어색해도\n인사 한마디에 용기를 내봐\n친구들의 미소 속에서 찾을 거야\n너를 기다리는 따뜻한 마음을\nDon't be afraid to be yourself\n네 모습 그대로가 아름다워\n\n[Pre-Chorus]\n구름 뒤엔 언제나 태양이 있어\n너의 꿈을 향해 날개를 펼쳐봐\n눈을 감고 느껴봐 네 안의 힘을\nYou are stronger than before my friend\n\n[Chorus]\nSHINE BRIGHT LIKE THE SKY IN THE SKY\n너의 빛은 언제나 눈부시니까\n두려워하지 마 어깨를 펴고\n너의 걸음으로 걸어가면 돼\nEvery day is a new beginning\n너와 함께 할게 곁에 있을게\n\n[Bridge]\n혼자라고 느껴질 때면 (기억해)\n언제나 네 곁에 있을게 (약속해)\n호주의 하늘도 너를 반기고 있어\n너는 사랑받기 위해 태어난 소중한 아이니까\n\n[Outro]\nSHINE BRIGHT... (SHINE BRIGHT...)\n너의 빛을 믿어봐\nI will be right here with you\nAlways and forever..."
+      },
+      {
+        "title": "매일매일이 선물 같아",
+        "duration": 181.900333,
+        "src": "everyday-carefree-04.mp4",
+        "lyrics": "[Verse 1]\n아침 햇살 눈부셔 눈을 떠보니\n온 세상이 나를 향해 웃고 있잖아\n새신을 신고서 밖으로 나가 볼까\n오늘은 또 어떤 재미난 일이 생길까\n(하하 호호 소리)\n바람도 살랑살랑 내 맘을 흔드네\n\n[Chorus]\n랄랄라 신나게 달려가 보자\n저 푸른 들판을 가로질러가\n매일매일이 선물 같아\n우린 모두 행복한 아이들\n(점프 점프 모두 뛰어봐)\n하늘 높이 꿈을 펼쳐봐\n\n[Verse 2]\n친구들을 만나면 더 신이 나지\n함께라면 어디든 두렵지 않아\n모래성도 쌓고 미끄럼틀도 타고\n시간 가는 줄 모르고 우린 놀지\n(신난다 재밌다)\n매일매일이 축제 같은 날들\n\n[Bridge]\n넘어져도 괜찮아 다시 일어나면 돼\n우리 곁엔 항상 웃음이 가득하니까\n함께 손을 잡고 더 높이 날아올라\n세상에서 가장 밝게 빛날 거야\n\n[Chorus]\n랄랄라 신나게 달려가 보자\n저 푸른 들판을 가로질러가\n매일매일이 선물 같아\n우린 모두 행복한 아이들\n(예! 매일매일 행복해!)\n랄랄라 랄랄라 끝없는 우리들의 이야기!"
+      }
+    ]
   }
 ];
