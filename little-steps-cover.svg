@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#e4efe3"/><stop offset="1" stop-color="#f6eed6"/></linearGradient></defs>
+<rect width="800" height="800" fill="url(#sky)"/>
+<circle cx="649" cy="181" r="64" fill="#eac977"/>
+<g fill="#254d42" font-family="'Noto Sans KR',sans-serif"><text x="64" y="76" font-size="14" letter-spacing="3">VOL. 02 / FOUR SONGS</text><text x="64" y="225" font-size="58" font-weight="600" letter-spacing="-3">작은 발걸음,</text><text x="64" y="311" font-size="58" font-weight="600" letter-spacing="-3">새로운 세상</text><text x="66" y="360" font-size="15" letter-spacing="3">LITTLE STEPS, NEW WORLD</text></g>
+<path d="M0 564 Q192 386 430 524 T800 479 V800 H0Z" fill="#a4be9c"/>
+<path d="M0 651 Q282 479 539 606 T800 581 V800 H0Z" fill="#6f957a"/>
+<path d="M287 800 C198 682 516 658 473 577 C456 546 404 528 430 515" fill="none" stroke="#f6e7c5" stroke-width="34"/>
+<path d="M289 800 C211 684 511 659 471 578" fill="none" stroke="#bd9d65" stroke-width="3" stroke-dasharray="3 19" stroke-linecap="round"/>
+<g fill="#f9f7ec" font-family="'Noto Sans KR',sans-serif"><text x="64" y="742" font-size="17">너의 작은 발걸음을 응원해.</text></g>
+</svg>
