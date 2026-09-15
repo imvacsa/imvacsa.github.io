@@ -6,14 +6,17 @@ const parts=[
 ['내 이름의 색깔','Progressive House',180.400,'',`낯선 길을 헤매던 시간들\n이제는 내 지도가 되어가네\n더 이상 겁나지 않는 내 모습\n조금 더 단단해진 나를 봐`,`넓게 펼쳐진 이 세상 속에서\n나는 이제 나만의 길을 걸어\n두려움은 지나간 바람일 뿐이야\n당당히 맞이하는 나의 내일로`,`서툴렀던 말들도 이제는 웃음으로\n마음의 벽을 하나씩 허물어가\n매일 조금씩 더 선명해지는\n내 이름의 색깔을 찾아가고 있어`,`부딪히며 배운 것들이 모여\n나를 만드는 가장 소중한 빛이 돼`,`그래 이게 나야\n새로운 나로 시작할게\n다시 또 한 번 더 나아가`],
 ['다시 나를 그려가','Deep House',180,'',`거울 속에 비친 낯선 내 모습\n이젠 익숙한 눈빛으로 다가와\n서툴렀던 어제는 지나가고\n당당히 오늘을 맞이해`,`난 이제 나만의 길을 찾아\n두려움 끝에 피어난 희망처럼\n새로운 풍경에 나를 더해\n이곳에서 다시 나를 그려가`,`낯설었던 언어들도 내 노래가 돼\n스쳐 간 바람마저 친구가 되고\n멈춰있던 시간은 다시 흘러\n내일이 기다려지는 오늘이야`,`부딪히며 배운 세상은\n생각보다 더 넓고 따뜻해`,`그래 이게 나야\n이제 난 괜찮아\n더 높이 빛날 테니까`]
 ];
-const tracks=parts.map(([title,genre,duration,intro,v1,c,v2,b,outro],i)=>({title,genre,duration,src:`southern-sky-0${i+1}.mp4`,lyrics:(i<2?[intro,`[Verse 1]\n${v1}`,`[Chorus]\n${c}${i===1?'\n'+c:''}`,`[Verse 2]\n${v2}`,`[Chorus]\n${c}`,`[Bridge]\n${b}`,`[Chorus]\n${c}`,`[Outro]\n${outro}`]:[`[Verse 1]\n${v1}`,`[Pre-Chorus]\n${b}`,`[Chorus]\n${c}`,`[Verse 2]\n${v2}`,`[Pre-Chorus]\n${b}`,`[Chorus]\n${c}`,`[Outro]\n${outro}`]).filter(Boolean).join('\n\n')}));
+const tracks=parts.flatMap(([title,genre,duration,intro,v1,c,v2,b,outro],i)=>{
+  if (i===1) return [];
+  return [{title,genre,duration,src:`southern-sky-0${i+1}.mp4`,lyrics:(i===0?[intro,`[Verse 1]\n${v1}`,`[Chorus]\n${c}`,`[Verse 2]\n${v2}`,`[Chorus]\n${c}`,`[Bridge]\n${b}`,`[Chorus]\n${c}`,`[Outro]\n${outro}`]:[`[Verse 1]\n${v1}`,`[Pre-Chorus]\n${b}`,`[Chorus]\n${c}`,`[Verse 2]\n${v2}`,`[Pre-Chorus]\n${b}`,`[Chorus]\n${c}`,`[Outro]\n${outro}`]).filter(Boolean).join('\n\n')}];
+});
 
 // Add another album object to this list. Each id must be unique and stable.
 const albums = [{
   id: 'southern-sky', title: '파란 하늘 아래, 천천히 피어나',
   english: 'Blooming Under the Southern Sky', coverTitle: '천천히\n피어나.',
   description: '낯선 하루에서, 나다운 내일로. 너의 속도로 자라는 모든 순간을 위한 노래.',
-  dedication: '너에게 전하는 여섯 곡', trackHeading: '여섯 번의 작은 용기',
+  dedication: '너에게 전하는 다섯 곡', trackHeading: '다섯 번의 작은 용기',
   letter: '네 생각을 하며 이 노래들을 모았어.\n낯선 곳에서 하루를 보내는 일은 생각보다 큰 용기가 필요하겠지. 잘하는 날에도, 마음처럼 되지 않는 날에도 너는 충분히 소중해.\n\n서두르지 않아도 괜찮아.\n너의 속도로, 천천히 피어나.',
   footer: '너의 모든 계절을 응원해.', credit: 'MADE WITH LOVE & GEMINI', tracks
 }];
