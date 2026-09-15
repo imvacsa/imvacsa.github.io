@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>임주원 교수 연구소 | 서울대학교병원 국제진료센터</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -38,14 +37,6 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -61,7 +52,6 @@
                 <div class="hidden md:flex space-x-6 text-sm">
                     <a href="#about" class="text-gray-700 hover:text-[#2563a8] transition">소개</a>
                     <a href="#research" class="text-gray-700 hover:text-[#2563a8] transition">연구 분야</a>
-                    <a href="#achievements" class="text-gray-700 hover:text-[#2563a8] transition">연구 성과</a>
                     <a href="#team" class="text-gray-700 hover:text-[#2563a8] transition">연구팀</a>
                     <a href="#publications" class="text-gray-700 hover:text-[#2563a8] transition">출판물</a>
                     <a href="#contact" class="text-gray-700 hover:text-[#2563a8] transition">연락처</a>
@@ -168,48 +158,6 @@
                     </div>
                     <h3 class="text-xl font-bold mb-4 text-[#1a4d80]">의료 혁신 연구</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">디지털 헬스케어 및 AI 기반 의료 서비스 혁신 방안 연구</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Research Achievements -->
-        <section id="achievements" class="mb-16">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold section-title inline-block">연구 성과</h2>
-                <p class="mt-4 text-gray-600 max-w-3xl mx-auto">지속적인 연구와 혁신을 통해 국제 의료 분야에서 의미 있는 성과를 창출하고 있습니다</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <h3 class="text-xl font-bold mb-6 text-center text-[#1a4d80]">연도별 국제 환자 진료 추이</h3>
-                    <div class="chart-container">
-                        <canvas id="patientChart"></canvas>
-                    </div>
-                    <p class="mt-4 text-sm text-gray-600 text-center">지속적인 국제 환자 유치 및 의료 서비스 확대</p>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <h3 class="text-xl font-bold mb-6 text-center text-[#1a4d80]">환자 만족도 지표</h3>
-                    <div class="chart-container">
-                        <canvas id="satisfactionChart"></canvas>
-                    </div>
-                    <p class="mt-4 text-sm text-gray-600 text-center">높은 환자 만족도를 통한 의료 서비스 품질 검증</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-                <div class="bg-gradient-to-br from-[#1a4d80] to-[#2563a8] rounded-xl p-6 text-white text-center card-hover">
-                    <p class="text-4xl font-black mb-2">150+</p>
-                    <p class="text-sm">연구 논문</p>
-                </div>
-                <div class="bg-gradient-to-br from-[#2563a8] to-[#3b82f6] rounded-xl p-6 text-white text-center card-hover">
-                    <p class="text-4xl font-black mb-2">30+</p>
-                    <p class="text-sm">국제 협력</p>
-                </div>
-                <div class="bg-gradient-to-br from-[#3b82f6] to-[#60a5fa] rounded-xl p-6 text-white text-center card-hover">
-                    <p class="text-4xl font-black mb-2">95%</p>
-                    <p class="text-sm">환자 만족도</p>
-                </div>
-                <div class="bg-gradient-to-br from-[#60a5fa] to-[#93c5fd] rounded-xl p-6 text-white text-center card-hover">
-                    <p class="text-4xl font-black mb-2">20+</p>
-                    <p class="text-sm">수상 실적</p>
                 </div>
             </div>
         </section>
@@ -321,82 +269,5 @@
         </div>
     </footer>
 
-    <script>
-        const colors = {
-            primary: '#1a4d80',
-            secondary: '#2563a8',
-            accent: '#3b82f6',
-            light: '#60a5fa',
-            gray: '#6b7280'
-        };
-
-        // Patient Chart
-        new Chart(document.getElementById('patientChart').getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
-                datasets: [{
-                    label: '국제 환자 수 (천명)',
-                    data: [12, 15, 13, 18, 22, 28],
-                    borderColor: colors.primary,
-                    backgroundColor: 'rgba(26, 77, 128, 0.1)',
-                    tension: 0.4,
-                    fill: true,
-                    borderWidth: 3,
-                    pointRadius: 5,
-                    pointBackgroundColor: colors.primary
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: true, position: 'top' }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: { display: true, text: '환자 수 (천명)' }
-                    }
-                }
-            }
-        });
-
-        // Satisfaction Chart
-        new Chart(document.getElementById('satisfactionChart').getContext('2d'), {
-            type: 'radar',
-            data: {
-                labels: ['진료 만족도', '시설 만족도', '의료진 친절도', '의사소통', '전반적 만족도'],
-                datasets: [{
-                    label: '만족도 점수',
-                    data: [95, 92, 97, 94, 95],
-                    backgroundColor: 'rgba(37, 99, 168, 0.2)',
-                    borderColor: colors.secondary,
-                    pointBackgroundColor: colors.secondary,
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: colors.secondary,
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: { display: true },
-                        suggestedMin: 0,
-                        suggestedMax: 100,
-                        ticks: {
-                            stepSize: 20
-                        }
-                    }
-                },
-                plugins: {
-                    legend: { position: 'top' }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
