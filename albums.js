@@ -63,7 +63,7 @@ albums.push({
   "id": "darkness-and-the-cry",
   "title": "기억의 끝자락: 깊은 어둠의 기록",
   "english": "Darkness & The Cry",
-  "cover": "darkness-and-the-cry-cover.png",
+  "cover": "album3.jpg",
   "description": "낯선 하루의 고립감, 거울 앞의 슬픔, 엄마를 향한 그리움. 중학교 1학년의 우울함과 두려움을 담은 세 곡.",
   "dedication": "중1의 마음을 담은 세 곡",
   "trackHeading": "세 곡의 마음 기록",
