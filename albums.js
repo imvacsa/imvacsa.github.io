@@ -94,3 +94,40 @@ albums.push({
     }
   ]
 });
+
+// Album 04 · 초등학교 3학년의 분노
+albums.push({
+  "id": "brutal-regime",
+  "title": "불타는 체제와 강철의 고백",
+  "english": "Brutal Regime",
+  "cover": "brutal-regime-cover.svg",
+  "description": "낯선 교실과 언어, 문화의 차이 앞에서 터져 나오는 마음. 초등학교 3학년의 분노와 혼란을 담은 세 곡.",
+  "dedication": "초3의 분노를 담은 세 곡",
+  "trackHeading": "세 곡의 뜨거운 목소리",
+  "letter": "숨 막히는 하루, 쌓여 가는 답답함, 말로 다 전하지 못한 분노.\n\n강렬한 리듬과 목소리로 그 마음을 기록했습니다.",
+  "footer": "말로 다 하지 못한 마음에게.",
+  "credit": "MUSIC WITH GEMINI",
+  "tracks": [
+    {
+      "title": "숨 쉴 곳이 아니야",
+      "genre": "Hardcore Trap Rap-Metal",
+      "duration": 182.000333,
+      "src": "brutal-regime-01.mp4",
+      "lyrics": "[Verse 1]\n틀에 박힌 책상 위에 내 이름은 없어\n숨 막히는 시스템 날 가두려 고집해 또 부려\n낯선 언어 속에서 난 유령처럼 떠돌아 다녀\n차가운 시선들 날 꿰뚫고 지나가 내 맘을 버려\n규칙이라는 감옥 속에 나를 쑤셔 넣어 부셔버려\n매일 똑같은 질문에 대답을 강요해 턱밑까지 채워\n난 고장이 난 기계처럼 삐걱거리며 버텨 겨우 버텨\n속에서 끓어오르는 불길을 아무도 몰라 주네 전혀\n\n[Chorus]\n여긴 내가 숨 쉴 곳이 아니야\n모두 부수고 난 날아갈 거야 난 갈 거야\n더는 참지 않아 폭발할 거야 폭발할 거야\n나의 세상을 내 손으로 만들 거야 난 만들 거야\n\n[Verse 2]\n문화적 충격이 내 머리를 강타해 정신없어 정말\n외톨이 신세로 난 구석에 처박혀 울부짖어 매일 밤\n너희의 기준에 난 맞지 않는 퍼즐 조각인가 봐 진짜\n억지로 끼워 맞추려 하지 마 부러질 테니까 가만히 놔둬\n눈빛엔 독기만 가득 차올라 더는 물러설 수 없어 결코\n나를 억압하는 모든 것들에 침을 뱉어 버려 퉤퉤퉤\n난 나만의 길을 갈 테니 너희는 거기 그대로 멈춰라 제발\n이제는 내 안의 괴물을 해방시킬 때가 된 것 같아 똑똑히 봐라\n\n[Chorus]\n여긴 내가 숨 쉴 곳이 아니야\n모두 부수고 난 날아갈 거야 난 갈 거야\n더는 참지 않아 폭발할 거야 폭발할 거야\n나의 세상을 내 손으로 만들 거야 난 만들 거야\n\n[Bridge]\n어둠 속에서 난 나만의 빛을 찾고 있어 난 찾고 있어\n너희가 뭐라 해도 난 내 길을 갈 뿐이야 가고 있어\n상처투성이가 되어도 난 절대 멈추지 않아 난 멈추지 않아\n내 안의 불꽃은 더욱 뜨겁게 타오를 뿐이야 타오르고 있어\n\n[Chorus]\n여긴 내가 숨 쉴 곳이 아니야\n모두 부수고 난 날아갈 거야 난 갈 거야\n더는 참지 않아 폭발할 거야 폭발할 거야\n나의 세상을 내 손으로 만들 거야 난 만들 거야\n\n[Outro]\n결국 난 나로 살기로 했어 난 나야 결코 날 꺾지 못해 너흰 절대\n내가 만든 세상에서 난 자유롭다 난 자유롭다 더는 속박은 없어 영원히"
+    },
+    {
+      "title": "시스템 강제 종료",
+      "genre": "Hyper-Industrial Deathcore-Rap",
+      "duration": 181.300333,
+      "src": "brutal-regime-02.mp4",
+      "lyrics": "[Intro]\n시스템 에러 붉은 신호가 켜져\n숨 막히는 교실 여긴 내 자리가 아냐\n\n[Verse 1]\n낯선 언어의 파편들이 내 머리를 짓눌러 쿵쾅대고\n철저한 고립감 속에서 난 매일매일 숨을 죽여가\n칠판 위의 글자들은 기괴한 암호처럼 나를 비웃고\n이질적인 문화의 충격은 내 모든 감각을 마비시켜\n설 곳 없는 이 교실에서 난 투명 인간이 되어버렸어\n가슴 속 깊은 곳에선 알 수 없는 분노가 치밀어 올라\n정체성의 혼란 속에 난 나 자신마저 잃어버릴 것 같아\n이 거대한 시스템의 압박은 내 영혼까지 갉아먹고 있어\n\n[Chorus]\n과부하 걸린 내 머리 폭발해\n더 이상 참을 수 없어 소리쳐\n나를 억누르는 모든 것들 부숴\n이 지옥 같은 곳에서 난 탈출해\n내 안의 분노가 불타올라 콰쾅\n더는 숨지 않아 당당히 맞서\n부서진 내 자아를 다시 세워\n난 나일 뿐 그 누구도 아냐\n\n[Verse 2]\n눈을 감아도 선명한 그들의 비웃음 섞인 시선들\n내 서툰 발음은 그들에겐 그저 하나의 가십거리지\n매일 밤 난 어둠 속에서 소리 없는 비명을 지르곤 해\n이 막막한 현실의 벽은 너무나 높고 단단해 보여\n하지만 난 이대로 주저앉아 패배자로 남진 않을 거야\n내 안에 잠든 거친 야성을 깨워 이 시스템을 뒤흔들리라\n더 이상 이질감에 떨지 않아 난 내 방식대로 살아남아\n내 상처들은 머지않아 가장 강력한 무기가 될 테니\n\n[Chorus]\n과부하 걸린 내 머리 폭발해\n더 이상 참을 수 없어 소리쳐\n나를 억누르는 모든 것들 부숴\n이 지옥 같은 곳에서 난 탈출해\n내 안의 분노가 불타올라 콰쾅\n더는 숨지 않아 당당히 맞서\n부서진 내 자아를 다시 세워\n난 나일 뿐 그 누구도 아냐\n\n[Chorus]\n과부하 걸린 내 머리 폭발해\n더 이상 참을 수 없어 소리쳐\n나를 억누르는 모든 것들 부숴\n이 지옥 같은 곳에서 난 탈출해\n내 안의 분노가 불타올라 콰쾅\n더는 숨지 않아 당당히 맞서\n부서진 내 자아를 다시 세워\n난 나일 뿐 그 누구도 아냐\n\n[Outro]\n시스템 종료 강제 로그아웃해\n난 내 길을 가 내 뜻대로 살아가\n더 이상 날 가둘 순 없어 절대로\n끝없는 어둠 속에서 난 다시 태어나"
+    },
+    {
+      "title": "가식의 가면",
+      "genre": "Industrial Metal",
+      "duration": 180,
+      "src": "brutal-regime-03.mp4",
+      "lyrics": "[Intro]\n(Haunting operatic vocalizations)\n(Low, rumbling dissonant choir chant)\n\n[Verse 1]\n낯선 공기 속에 갇혀 숨이 막혀와\n눈을 떠보니 난 다른 세계에 있어\n모든 미소가 칼날처럼 날 찢어대고\n너희의 친절은 차가운 가면에 불과해\n말을 잃어버린 아이의 눈빛 속에서\n피어나는 건 검붉은 분노와 공포뿐\n더는 참을 수 없어 이 모든 가식들을\n내 안의 괴물이 눈을 뜨기 시작했어\n\n[Chorus]\nSystem shock! All systems overload!\n다 부숴버려, 이 위선의 벽을!\n나는 더 이상 순종하는 인형이 아냐!\n폭발하는 분노가 온몸을 휘감아!\nErase the code! Delete my memory!\n이방인의 눈물은 이제 끝났다!\n\n[Verse 2]\n감각의 과부하, 모든 게 뒤엉켜가\n내 목소리는 저 소음 속으로 사라져\nI'm a glitch, a virus in your system!\n나를 고치려 하지 마, 난 고장 난 게 아냐!\n이질적인 문화는 내 숨통을 조여오고\n고립된 섬에서 난 매일 서서히 죽어가\n하지만 이제는 아냐, 내가 널 파괴할 테니!\n분노의 불꽃이 이 감옥을 다 태울 거야!\n\n[Chorus]\nSystem shock! All systems overload!\n다 부숴버려, 이 위선의 벽을!\n나는 더 이상 순종하는 인형이 아냐!\n폭발하는 분노가 온몸을 휘감아!\nErase the code! Delete my memory!\n이방인의 눈물은 이제 끝났다!\n\n[Bridge]\n(Guttural growls and shrieks of pure agony)\nI am... breaking... apart!\n(Heavy, labored breathing and glitch sounds)\nNo more... lies!\n\n[Chorus]\nSystem shock! All systems overload!\n다 부숴버려, 이 위선의 벽을!\n나는 더 이상 순종하는 인형이 아냐!\n폭발하는 분노가 온몸을 휘감아!\nErase the code! Delete my memory!\n이방인의 눈물은 이제 끝났다!\n\n[Outro]\n(Digital static and fading electronic hums)\n(Faint, distant choir chant trails off into nothing)"
+    }
+  ]
+});

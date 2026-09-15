@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#171b24"/><stop offset="1" stop-color="#080b12"/></linearGradient><linearGradient id="fire" x2="0" y2="1"><stop stop-color="#ffb467"/><stop offset="1" stop-color="#ef4a35"/></linearGradient></defs>
+<rect width="800" height="800" fill="url(#bg)"/>
+<g fill="none" stroke="#78838d" stroke-width="2" opacity=".22"><path d="M80 0v800M160 0v800M240 0v800M320 0v800M400 0v800M480 0v800M560 0v800M640 0v800M720 0v800M0 80h800M0 160h800M0 240h800M0 320h800M0 400h800M0 480h800M0 560h800M0 640h800M0 720h800"/></g>
+<path d="M480 120 358 316 421 322 272 544 498 346 439 323 564 120Z" fill="url(#fire)"/>
+<path d="m300 224-93 82 72 13-93 103m361-193 69 70-36 16 62 81" fill="none" stroke="#ed6c4b" stroke-width="4" opacity=".5"/>
+<g font-family="Arial, 'Apple SD Gothic Neo', sans-serif" fill="#f7eee4"><text x="64" y="73" font-size="18" letter-spacing="5">ALBUM 04 / THREE VOICES</text><text x="64" y="621" font-size="55" font-weight="700">불타는 체제와</text><text x="64" y="690" font-size="55" font-weight="700">강철의 고백</text><text x="66" y="744" font-size="16" letter-spacing="3" fill="#d6a18e">BRUTAL REGIME</text></g></svg>
