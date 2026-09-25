@@ -9,6 +9,7 @@
   }
   document.title=`${album.title} | 음악과 일상`;
   const songs=album.tracks;
+  document.querySelector('#lyrics').closest('details').hidden = album.instrumental === true;
   const text=(selector,value)=>document.querySelector(selector).textContent=value;
   text('#album-title',album.title);text('.english',album.english||'');text('.description',album.description);
   text('#dedication',album.dedication||'음악과 일상');text('#track-heading',album.trackHeading||'수록곡');

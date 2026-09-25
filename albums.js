@@ -304,5 +304,55 @@ const albums = [
         "lyrics": "[1절]\n차가운 공기가 나를 감싸고\n하얀 저 문이 나를 부르네\n피할 수 없는 시간의 흐름\n가슴은 두근 떨리고 있어\n\n[후렴]\n아프지 않게 빨리 끝내줘요\n이 두려움 속에서 나를 구해줘\n하지만 알아야 할 치료의 시간\n용기를 내어 나 마주하리라\n\n[2절]\n눈을 감아도 선명한 두려움\n시계 소리는 점점 커지고\n하지만 나는 도망치지 않아\n더 나은 내일을 위해 버틸 뿐\n\n[후렴]\n아프지 않게 빨리 끝내줘요\n이 두려움 속에서 나를 구해줘\n하지만 알아야 할 치료의 시간\n용기를 내어 나 마주하리라\n\n[브릿지]\n폭풍우 속을 걷는 것처럼\n내 맘은 심하게 흔들리지만\n이 어둠 끝엔 빛이 있음을\n다시 한번 나 믿어보려 해\n\n[후렴]\n아프지 않게 빨리 끝내줘요\n이 두려움 속에서 나를 구해줘\n하지만 알아야 할 치료의 시간\n용기를 내어 나 마주하리라\n\n[아웃트로]\n조금만 더 참으면 끝나리\n찬란한 내일의 미소를 위해"
       }
     ]
+  },
+  {
+    "id": "settling-ripples",
+    "title": "물결이 잦아드네",
+    "english": "When the Ripples Settle",
+    "coverTitle": "물결이\n잦아드네",
+    "description": "펠트 피아노와 부드러운 패드, 맑은 울림이 이어지는 여섯 연주곡. 분주한 하루 끝에 잠시 숨을 고르는 시간.",
+    "dedication": "조용히 머물고 싶은 순간에",
+    "trackHeading": "고요로 이어지는 여섯 곡",
+    "instrumental": true,
+    "footer": "물결이 잦아드는 자리에서",
+    "credit": "MUSIC WITH GEMINI",
+    "tracks": [
+      {
+        "title": "The Unopened Book",
+        "genre": "앰비언트 · 연주곡",
+        "duration": 179.967333,
+        "src": "settling-ripples-01.mp4"
+      },
+      {
+        "title": "Weighted Sunlight",
+        "genre": "앰비언트 · 연주곡",
+        "duration": 172.233333,
+        "src": "settling-ripples-02.mp4"
+      },
+      {
+        "title": "Stars Before Dawn",
+        "genre": "앰비언트 · 연주곡",
+        "duration": 173.433333,
+        "src": "settling-ripples-03.mp4"
+      },
+      {
+        "title": "A Still Morning Garden",
+        "genre": "앰비언트 · 연주곡",
+        "duration": 178.067333,
+        "src": "settling-ripples-04.mp4"
+      },
+      {
+        "title": "A Measured Path",
+        "genre": "앰비언트 · 연주곡",
+        "duration": 179.700333,
+        "src": "settling-ripples-05.mp4"
+      },
+      {
+        "title": "Soft Shore of Morning",
+        "genre": "앰비언트 · 연주곡",
+        "duration": 174.200333,
+        "src": "settling-ripples-06.mp4"
+      }
+    ]
   }
 ];
