@@ -68,3 +68,7 @@ GitHub Pages 정적 사이트입니다. 홈페이지의 기존 연구·소개 �
 8. 물결이 잦아드네 — 가사 없는 연주곡 6곡, 17분 38초 (`settling-ripples`)
 
 연주곡 앨범에는 `instrumental: true`를 지정해 가사 영역을 숨깁니다. 수록 순서는 Gemini 제작 대화와 원본 파일명을 따릅니다.
+
+## 5~8집 커버
+
+2026-09-25 내장 이미지 생성 도구로 제작한 앨범별 커버를 사용합니다. 웹용 JPEG는 1024×1024이며, 제작 원본과 프롬프트는 작업공간의 `outputs/album-cover-originals/`와 `work/album-cover-prompts.json`에 보관했습니다.
