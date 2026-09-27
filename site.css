@@ -27,3 +27,43 @@ main{overflow-wrap:anywhere}.grid>*{min-width:0}
 @media(min-width:768px){.md\:px-8{padding-left:2rem;padding-right:2rem}.md\:p-16{padding:4rem}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:col-span-1{grid-column:span 1/span 1}.md\:col-span-2{grid-column:span 2/span 2}.md\:text-sm{font-size:.875rem;line-height:1.25rem}.md\:text-base{font-size:1rem;line-height:1.5rem}.md\:text-lg{font-size:1.125rem;line-height:1.75rem}.md\:text-xl{font-size:1.25rem;line-height:1.75rem}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-5xl{font-size:3rem;line-height:1}}
 
 .gradient-bg h2,.gradient-bg p{word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
+
+/* Refined editorial system shared with the music pages. */
+:root{
+  --surface:#f7f8f7;--surface-raised:#fff;--surface-soft:#eef2f1;
+  --ink:#121817;--ink-muted:#5d6865;--accent:#164f48;--accent-soft:#dce9e6;
+  --line:#dfe5e3;--radius-lg:24px;--radius-md:16px;
+  --text-display:clamp(2.75rem,6vw,5.5rem);--text-section:clamp(2rem,4vw,3.5rem);
+  --text-body:clamp(.98rem,1.2vw,1.08rem);--section-space:clamp(5.5rem,10vw,9rem)
+}
+html{scroll-behavior:smooth}body{background:var(--surface);color:var(--ink);font-feature-settings:"kern" 1,"liga" 1}
+body>nav{position:sticky;top:0;z-index:50;background:rgba(247,248,247,.88);border-bottom:1px solid rgba(18,24,23,.08);backdrop-filter:saturate(160%) blur(18px);-webkit-backdrop-filter:saturate(160%) blur(18px)}
+body>nav .container{max-width:1280px}body>nav h1{color:var(--ink);letter-spacing:-.025em}body>nav p{color:var(--ink-muted)}
+.site-links a{position:relative;color:var(--ink-muted);font-weight:600;transition:color .18s ease}
+.site-links a::after{position:absolute;right:4px;bottom:5px;left:4px;height:1px;background:currentColor;content:"";transform:scaleX(0);transform-origin:right;transition:transform .18s ease}
+.site-links a:hover{color:var(--ink)}.site-links a:hover::after{transform:scaleX(1);transform-origin:left}
+#about,#research,#team,#publications,#music,#contact{scroll-margin-top:108px}
+#about,#research,#team,#publications,#contact{margin-bottom:var(--section-space)}
+.section-kicker{margin-bottom:.75rem;color:var(--accent);font-size:.7rem;font-weight:700;letter-spacing:.2em;line-height:1.4}
+.section-title{border:0;padding:0;color:var(--ink);font-size:var(--text-section);font-weight:650;letter-spacing:-.045em;line-height:1.12;text-wrap:balance}
+.section-title+ p{max-width:62ch;font-size:var(--text-body);line-height:1.8;color:var(--ink-muted)}
+.shadow-lg{border-color:var(--line);box-shadow:0 1px 2px rgba(18,24,23,.025)}
+.rounded-2xl{border-radius:var(--radius-lg)}.rounded-xl{border-radius:var(--radius-md)}
+#about .shadow-lg{background:var(--surface-raised);border:1px solid var(--line)}
+.feature-card,.team-card{background:transparent;border:0;box-shadow:none;text-align:left}
+.feature-card{padding:2rem 1rem}.team-card{padding:1.5rem 1rem}
+.feature-card h3,.team-card h4{color:var(--ink);letter-spacing:-.025em}.feature-card p,.team-card p{max-width:32ch;line-height:1.75}
+.icon-shell{width:56px;height:56px;margin-left:0;margin-right:0;background:var(--accent-soft);color:var(--accent);border:1px solid rgba(22,79,72,.1)}
+.icon-shell svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
+#publications>.bg-white,#contact>.bg-white{background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:none}
+#publications .border-l-4{border-left-width:1px;border-color:var(--line);transition:background-color .18s ease,border-color .18s ease}
+#publications .border-l-4:hover{border-color:var(--accent);background:var(--surface-soft)}
+#publications h4{letter-spacing:-.015em;line-height:1.45}#publications a{color:var(--accent);font-weight:650}
+#contact .bg-gray-100{background:var(--surface-soft)}
+body>footer{background:#10201e;color:#f5f7f6}
+@media(max-width:767px){
+  body>nav .container>.flex{display:block}.site-links{flex-wrap:nowrap;overflow-x:auto;margin:10px -1rem -1rem;padding:0 1rem 1rem;scrollbar-width:none}.site-links::-webkit-scrollbar{display:none}.site-links a{flex:0 0 auto}
+  #about,#research,#team,#publications,#music,#contact{scroll-margin-top:138px}
+  .feature-card,.team-card{padding:1.5rem .25rem;text-align:left}.section-title{letter-spacing:-.035em}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.site-links a,.site-links a::after,#publications .border-l-4{transition:none}}

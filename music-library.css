@@ -6,3 +6,15 @@
 .music-link,.library-header a{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;box-sizing:border-box}
 .album-card{transition:none}
 .album-card:hover{transform:none;box-shadow:none}
+
+/* Shared visual language: quiet surfaces, editorial type, restrained motion. */
+:root{--surface:#f7f8f7;--surface-raised:#fff;--surface-soft:#eef2f1;--ink:#121817;--ink-muted:#5d6865;--accent:#164f48;--accent-soft:#dce9e6;--line:#dfe5e3;--radius-lg:24px;--radius-md:16px}
+.music-section{background:var(--surface-soft);border-color:var(--line);border-radius:var(--radius-lg)}
+.music-heading h2,.library-main h1{color:var(--ink);font-weight:650;letter-spacing:-.045em}.music-heading h2{font-size:clamp(2rem,4vw,3.5rem)}
+.music-kicker,.music-link,.album-bottom,.library-header a{color:var(--accent)}
+.music-heading p:not(.music-kicker),.library-intro,.album-copy p,.music-note,.library-header span,.library-footer{color:var(--ink-muted)}
+.album-card{background:var(--surface-raised);border-color:var(--line);border-radius:var(--radius-md);color:var(--ink);transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.album-copy h3{letter-spacing:-.025em}.library-page{background:var(--surface);color:var(--ink)}
+.library-header,.library-divider,.library-footer{border-color:var(--line)}
+@media(hover:hover) and (pointer:fine){.album-card:hover{transform:translateY(-2px);border-color:#c6d2cf;box-shadow:0 12px 30px rgba(18,24,23,.06)}}
+@media(prefers-reduced-motion:reduce){.album-card{transition:none}.album-card:hover{transform:none;box-shadow:none}}

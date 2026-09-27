@@ -12,3 +12,15 @@ header nav a,.transport a,.transport button{display:inline-flex;align-items:cent
 .track small,.num{color:#465e59}
 #lyrics:focus-visible,input:focus-visible{outline:2px solid #315950;outline-offset:4px}
 .art{transform:none;box-shadow:none}
+
+/* Shared visual language with the main site and album library. */
+:root{--surface:#f7f8f7;--surface-raised:#fff;--surface-soft:#eef2f1;--ink:#121817;--ink-muted:#5d6865;--accent:#164f48;--accent-soft:#dce9e6;--line:#dfe5e3;--radius-lg:24px;--radius-md:16px;color:var(--ink);background:var(--surface)}
+header,footer,.listening{border-color:var(--line)}header a,.eyebrow{color:var(--accent)}
+h1{font-size:clamp(2.6rem,5vw,4.8rem);font-weight:600;line-height:1.25;letter-spacing:-.045em}h1 em{color:var(--accent)}
+.description{max-width:60ch;color:var(--ink-muted);font-size:clamp(.98rem,1.2vw,1.08rem)}
+.primary{background:var(--accent);border-radius:999px;transition:background-color .18s ease,transform .18s ease}.primary:hover{background:#0f3e38}
+.track{border-color:var(--line)}.track:hover,.track.active{background:var(--surface-soft)}
+.playerpanel{background:var(--surface-raised);border-color:var(--line);border-radius:var(--radius-md)}
+#genre,#lyrics,footer{color:var(--ink-muted)}
+@media(hover:hover) and (pointer:fine){.primary:hover{transform:translateY(-1px)}}
+@media(prefers-reduced-motion:reduce){.primary{transition:none}.primary:hover{transform:none}}
